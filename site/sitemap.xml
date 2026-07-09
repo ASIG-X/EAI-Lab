@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/camera_tracking/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/drone/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/uwb/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/jetson/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/gloves/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/mumos/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/markdown/</loc>
+      </url>
 </urlset>
