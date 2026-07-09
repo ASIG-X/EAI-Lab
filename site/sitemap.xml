@@ -4,27 +4,33 @@
         <loc>https://asig-x.github.io/EAI-Lab/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/camera_tracking/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/camera_tracking/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/drone/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/drone/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/uwb/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/uwb/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/jetson/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/vins_mono/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/gloves/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/gloves/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/mumos/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_mujoco/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_isaaclab/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_deployment/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/acknowledgements/</loc>
       </url>
       <url>
         <loc>https://asig-x.github.io/EAI-Lab/markdown/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/acknowledgments/</loc>
       </url>
 </urlset>

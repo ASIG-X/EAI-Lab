@@ -2,7 +2,7 @@
 icon: lucide/rocket
 ---
 
-# Comenius Open-sourced Documentation
+# Embodied AI Lab for Education
 
 For full documentation visit [zensical.org](https://zensical.org/docs/).
 

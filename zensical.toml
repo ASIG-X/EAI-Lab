@@ -46,18 +46,19 @@ Copyright &copy; 2026 ASIG Lab
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
   { "Get started" = "index.md" },
-  { "Camera Tracking" = [
-     "camera_tracking.md",
+  { "Motion Capture" = [
+    "mocap/camera_tracking.md",
+    "mocap/drone.md",
+    "mocap/uwb.md",
+    "mocap/vins_mono.md",
+    "mocap/gloves.md",
   ]},
-  { "Drones - Crazyflie" = "drone.md" },
-  { "UWB" = "uwb.md" },
   { "Unitree Go2" = [
-     "jetson.md",
+    "go2/go2_mujoco.md",
+    "go2/go2_isaaclab.md",
+    "go2/go2_deployment.md",
   ]},
-  { "Gloves" = "gloves.md" },
-  { "Course Assignments" = [
-    "mumos.md",
-  ]},
+  { "Acknowledgements" = "acknowledgements.md" },
   { "Markdown" = "markdown.md" },
 ]
 
