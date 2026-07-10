@@ -80,7 +80,7 @@ The full rewards, reward scales and definitions are listed below:
 | `stand_still` | `-1.0` | $\mathbb{1}_{\lVert\mathbf{c}\rVert_2<0.01}\sum_{j=1}^{12}\left\|q_j-q_j^{\mathrm{default}}\right\|$ |
 | `energy` | `-0.001` | $\sum_{j=1}^{12}\left \| \dot{q}_j\right\| \cdot \left\|\tau_j\right\|$ |
 
-### Domain Randomization
+### Domain Randomization (TO BE FINISHED)
 [Domain randomization](https://arxiv.org/pdf/1703.06907) is used to reduce overfitting, improve robustness, and prepare the controller for deployment conditions. 
 
 | Quantity | Distribution |
