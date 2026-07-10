@@ -44,14 +44,14 @@ cfclient
 ### Configure Crazyflie’s address in cfclient for the first use of Crazyflie
 1. Connect the *Crazyflie* with computer via micro USB cable
 2. Open *cfclient*. The interface looks as follows
-![Alt text](images/drone/drone-1.png)
+![Alt text](../../images/drone/drone-1.png)
 3. Click on `Scan` -> `usb://0` will show in the drop down menu ->  
 Click on `Connect`  
-![Alt text](images/drone/drone-2.png){ width="400" }  
+![Alt text](../images/drone/drone-2.png){ width="400" }  
 4. After successful connection, define the address by going to tab `Connect/Configure 2.x` ->  
 In the following window, change the last two digits of `Radio Address` to e.g., `01` ->  
 Click on `Write`  
-![Alt text](images/drone/drone-3.png){ width="400" }  
+![Alt text](../images/drone/drone-3.png){ width="400" }  
 4. Exit *cfclient*
 
 ### Connect to the Crazyflie through Crazyradio
@@ -63,19 +63,19 @@ A successful start should have LEDs as shown [here](https://www.bitcraze.io/docu
 3. Launch cfclient
 4. Change the following `Address` to the desired one  
 (e.g., the one just configured before)  
-![Alt text](images/drone/drone-4.png){ width="400" }  
+![Alt text](../images/drone/drone-4.png){ width="400" }  
 5. Click on `Scan` to detect available *Crazyflie* addresses  
 6. Select the desired *Crazyflie* address from the drop down menu  
 7. **Important**: Before clicking on ‘connect’, briefly unplug and then plug in the *Crazyradio* again
 8. Click on `Connect` in the *cfclient*.  
 A successful connection will be shown on the top of the window `Connected on radio…`  
 Failed connection: always `Connecting …`
-![Alt text](images/drone/drone-5.png)  
+![Alt text](../images/drone/drone-5.png)  
 **Note**: This unplug and plug-in action in step 7 helps resolve potential connection issues as noted [here](https://github.com/orgs/bitcraze/discussions/1682), which causes *cfclient* to get stuck during the connection stage. Although an alternative solution (downgrading the firmware) is mentioned on the same page, it has not been tested yet.   
 If the connection succeeds, the flight data on the right side of *cfclient* should show the orientation of the *Crazyflie*. The LEDs on *Crazyradio* and *Crazyflie* should look like this:
-![Alt text](images/drone/drone-6.png){ width="400" }  
+![Alt text](../images/drone/drone-6.png){ width="400" }  
 *Crazyradio* has green & yellow LED on  
-![Alt text](images/drone/drone-7.png){ width="400" }  
+![Alt text](../images/drone/drone-7.png){ width="400" }  
 *Crazyflie*: M1 blinking red twice every second (constantly red means error), M2 & M3 constantly blue, M4 constantly yellow.  
 Other cases please refer to [here](https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/) in section *Understanding LEDs*.
 9. *Optional*: Check the box `View/Tabs/Parameters` to check the available topics.
@@ -84,7 +84,7 @@ Other cases please refer to [here](https://www.bitcraze.io/documentation/tutoria
 1. Attach markers.  
 The arrangement of markers is crucial for accurate pose estimation and precise control of the *Crazyflie*. Consider using an **asymmetric** layout of markers.  
 Refer to the example picture below.  
-![Alt text](images/drone/drone-8.png){ width="400" }  
+![Alt text](../images/drone/drone-8.png){ width="400" }  
 2. Open QTM and define a rigid body for the *Crazyflie* with the origin set at its **center**.  
 Make sure that the x-axis is oriented towards the **front** (as shown in [Section *Getting to Know Your Crazyflie*](https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/)), and the z-axis points **upwards**.
 3. Name the rigid body `cfx`, where `x` corresponds to the last digits of the *Crazyflie*'s address (as a rule of thumb).  
@@ -142,4 +142,4 @@ It can be resolved by commenting out the code block between lines `198` and `203
 2. Before running any ros node, make sure the *cfclient* is closed.  
 3. The *Crazyflie* battery is charged using the device shown below.  
 Connect the battery to one end of the charger and the micro-USB cable to the other end. Then connect the micro-USB cable to a laptop to supply power for charging.
-![Alt text](images/drone/drone-9.png){ width="300" }
+![Alt text](../images/drone/drone-9.png){ width="300" }

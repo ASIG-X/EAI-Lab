@@ -1046,14 +1046,14 @@
 <ol>
 <li>Connect the <em>Crazyflie</em> with computer via micro USB cable</li>
 <li>Open <em>cfclient</em>. The interface looks as follows
-<img alt="Alt text" src="../images/drone/drone-1.png" /></li>
+<img alt="Alt text" src="../../../images/drone/drone-1.png" /></li>
 <li>Click on <code>Scan</code> -&gt; <code>usb://0</code> will show in the drop down menu -&gt;<br />
 Click on <code>Connect</code><br />
-<img alt="Alt text" src="../images/drone/drone-2.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/drone/drone-2.png" width="400" />  </li>
 <li>After successful connection, define the address by going to tab <code>Connect/Configure 2.x</code> -&gt;<br />
 In the following window, change the last two digits of <code>Radio Address</code> to e.g., <code>01</code> -&gt;<br />
 Click on <code>Write</code><br />
-<img alt="Alt text" src="../images/drone/drone-3.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/drone/drone-3.png" width="400" />  </li>
 <li>Exit <em>cfclient</em></li>
 </ol>
 <h3 id="connect-to-the-crazyflie-through-crazyradio">Connect to the Crazyflie through Crazyradio<a class="headerlink" href="#connect-to-the-crazyflie-through-crazyradio" title="Permanent link">&para;</a></h3>
@@ -1065,19 +1065,19 @@ A successful start should have LEDs as shown <a href="https://www.bitcraze.io/do
 <li>Launch cfclient</li>
 <li>Change the following <code>Address</code> to the desired one<br />
 (e.g., the one just configured before)<br />
-<img alt="Alt text" src="../images/drone/drone-4.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/drone/drone-4.png" width="400" />  </li>
 <li>Click on <code>Scan</code> to detect available <em>Crazyflie</em> addresses  </li>
 <li>Select the desired <em>Crazyflie</em> address from the drop down menu  </li>
 <li><strong>Important</strong>: Before clicking on ‘connect’, briefly unplug and then plug in the <em>Crazyradio</em> again</li>
 <li>Click on <code>Connect</code> in the <em>cfclient</em>.<br />
 A successful connection will be shown on the top of the window <code>Connected on radio…</code><br />
 Failed connection: always <code>Connecting …</code>
-<img alt="Alt text" src="../images/drone/drone-5.png" /><br />
+<img alt="Alt text" src="../../images/drone/drone-5.png" /><br />
 <strong>Note</strong>: This unplug and plug-in action in step 7 helps resolve potential connection issues as noted <a href="https://github.com/orgs/bitcraze/discussions/1682">here</a>, which causes <em>cfclient</em> to get stuck during the connection stage. Although an alternative solution (downgrading the firmware) is mentioned on the same page, it has not been tested yet. <br />
 If the connection succeeds, the flight data on the right side of <em>cfclient</em> should show the orientation of the <em>Crazyflie</em>. The LEDs on <em>Crazyradio</em> and <em>Crazyflie</em> should look like this:
-<img alt="Alt text" src="../images/drone/drone-6.png" width="400" /><br />
+<img alt="Alt text" src="../../images/drone/drone-6.png" width="400" /><br />
 <em>Crazyradio</em> has green &amp; yellow LED on<br />
-<img alt="Alt text" src="../images/drone/drone-7.png" width="400" /><br />
+<img alt="Alt text" src="../../images/drone/drone-7.png" width="400" /><br />
 <em>Crazyflie</em>: M1 blinking red twice every second (constantly red means error), M2 &amp; M3 constantly blue, M4 constantly yellow.<br />
 Other cases please refer to <a href="https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/">here</a> in section <em>Understanding LEDs</em>.</li>
 <li><em>Optional</em>: Check the box <code>View/Tabs/Parameters</code> to check the available topics.</li>
@@ -1087,7 +1087,7 @@ Other cases please refer to <a href="https://www.bitcraze.io/documentation/tutor
 <li>Attach markers.<br />
 The arrangement of markers is crucial for accurate pose estimation and precise control of the <em>Crazyflie</em>. Consider using an <strong>asymmetric</strong> layout of markers.<br />
 Refer to the example picture below.<br />
-<img alt="Alt text" src="../images/drone/drone-8.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/drone/drone-8.png" width="400" />  </li>
 <li>Open QTM and define a rigid body for the <em>Crazyflie</em> with the origin set at its <strong>center</strong>.<br />
 Make sure that the x-axis is oriented towards the <strong>front</strong> (as shown in <a href="https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/">Section <em>Getting to Know Your Crazyflie</em></a>), and the z-axis points <strong>upwards</strong>.</li>
 <li>Name the rigid body <code>cfx</code>, where <code>x</code> corresponds to the last digits of the <em>Crazyflie</em>'s address (as a rule of thumb).<br />
@@ -1138,7 +1138,7 @@ It can be resolved by commenting out the code block between lines <code>198</cod
 <li>Before running any ros node, make sure the <em>cfclient</em> is closed.  </li>
 <li>The <em>Crazyflie</em> battery is charged using the device shown below.<br />
 Connect the battery to one end of the charger and the micro-USB cable to the other end. Then connect the micro-USB cable to a laptop to supply power for charging.
-<img alt="Alt text" src="../images/drone/drone-9.png" width="300" /></li>
+<img alt="Alt text" src="../../images/drone/drone-9.png" width="300" /></li>
 </ol>
 
 
@@ -1248,6 +1248,10 @@ Connect the battery to one end of the charger and the micro-USB cable to the oth
     
     
       <script src="../../assets/javascripts/bundle.3809e150.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

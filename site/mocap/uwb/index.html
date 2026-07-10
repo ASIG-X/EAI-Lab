@@ -873,9 +873,9 @@
 <li>Download the Loco Positioning node firmware.  </li>
 <li>Update the nodes.<br />
 <strong>Note 1</strong>: Updating the LPS node through firmware may take several minutes. After clicking the <code>Update</code> button, it turns grey, and it is normal for the progress bar to remain 0% for about a minute before showing any values.<br />
-<img alt="Alt text" src="../images/uwb/uwb-1.png" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-1.png" /><br />
 <strong>Note 2</strong>: If you run into the following issue, restarting the computer solves the problem.<br />
-<img alt="Alt text" src="../images/uwb/uwb-2.png" width="500" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-2.png" width="500" />  </li>
 <li>Configuring the nodes into anchors.</li>
 </ol>
 <h2 id="loco-positioning-system-lps-usage">Loco Positioning System (LPS) usage<a class="headerlink" href="#loco-positioning-system-lps-usage" title="Permanent link">&para;</a></h2>
@@ -885,23 +885,23 @@ A complete anchor set should resemble the configuration shown in the following p
 <strong>Note 1</strong>: The numbers in the top-right corner indicate the anchor IDs.<br />
 <strong>Note 2</strong>: When connecting or disconnecting a power bank, always plug and unplug the cable from the power bank end. This approach is easier and helps protect the micro-USB port on the anchor board from wear or damage.<br />
 <strong>Note 3</strong>: make sure all powerbanks have enough power the day before conducting experiments.<br />
-<img alt="Alt text" src="../images/uwb/uwb-3.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-3.png" width="400" />  </li>
 <li>Turn on the <em>Crazyflie</em>.<br />
 <strong>Note</strong>: Communication between the computer and the anchors is relayed through <em>Crazyflie</em>.<br />
 Therefore, a <em>Crazyflie</em> equipped with an active <a href="https://store.bitcraze.io/products/loco-positioning-deck">Loco Positioning Deck</a> must be powered on in order for the anchors to be successfully detected in both <em>cfclient</em> and the ROS 2 driver.<br />
-<img alt="Alt text" src="../images/uwb/uwb-4.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-4.png" width="400" />  </li>
 <li>Check anchor status in <em>cfclient</em>.<br />
 Go to the <code>Loco Positioning</code> tab -&gt;<br />
 Check the <code>Crazyflie status</code> panel.<br />
 Anchors that are successfully detected are shown in green boxes, while undetected anchors are shown in red.<br />
 The reference image below illustrates a successful detection of anchors <code>0</code>~<code>5</code>, while anchors <code>6</code> and <code>7</code> are not detected. (Currently, only six anchors are required for localization.)<br />
 Green dots represent the anchor locations, and the blue dot indicates the estimated tag position. Walk around the space and observe whether the blue dot provides reasonable position estimates.<br />
-<img alt="Alt text" src="../images/uwb/uwb-5.png" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-5.png" />  </li>
 <li>Place the anchors according to the layout shown in the reference image above.<br />
 In the current setup, anchors <code>0</code>~<code>3</code> are placed on the ground, while anchors <code>4</code> and <code>5</code> are mounted on the pole. The figure below shows a top-down view of the configuration. All dimensions are given in meters.<br />
-<img alt="Alt text" src="../images/uwb/uwb-7.png" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-7.png" /><br />
 <strong>Note 1</strong>: Anchor <code>0</code> defines the origin of the coordinate frame. The positions of all other anchors are specified relative to this anchor.<br />
-<img alt="Alt text" src="../images/uwb/uwb-8.png" width="200" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-8.png" width="200" /><br />
 Current anchor positions <code>[x,y,z]</code> in meters (they correspond to the coordinates in the step below):
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>an_0: [0.00, 0.00, 0.00]
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>an_1: [2.70, 0.00, 0.00]
@@ -911,16 +911,16 @@ Current anchor positions <code>[x,y,z]</code> in meters (they correspond to the 
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>an_5: [2.70, 2.40, 2.00]
 </span></code></pre></div>
 <strong>Note 2</strong>: The anchor antenna is located at the orange-marked area shown below. Ensure that this point is positioned according to the dimensions specified above. The lab floor mat has dimensions of <code>0.3 × 0.3</code> m², which can be used as a convenient reference when arranging the anchors.<br />
-<img alt="Alt text" src="../images/uwb/uwb-9.png" width="400" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-9.png" width="400" /><br />
 <strong>Note 3</strong>: When placing anchors <code>4</code> and <code>5</code>, align the bottom of each anchor stand with the marked line on the pole.<br />
-<img alt="Alt text" src="../images/uwb/uwb-10.png" width="300" />
-<img alt="Alt text" src="../images/uwb/uwb-11.png" width="325" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-10.png" width="300" />
+<img alt="Alt text" src="../../images/uwb/uwb-11.png" width="325" />  </li>
 <li>Configure anchor positions (<strong>skip this step</strong> if the anchor locations do not need to be changed).<br />
 Click <code>Get from anchors</code> to load the current anchor configuration.
 When you select and modify a coordinate, it will turn red to indicate an unsaved change. 
 After making the necessary updates, click <code>Write to anchors</code> to save the new configuration. Once the process is complete, all blocks should turn green, as shown in the reference image on the right.
-<img alt="Alt text" src="../images/uwb/uwb-12.png" width="300" />
-<img alt="Alt text" src="../images/uwb/uwb-13.png" width="300" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-12.png" width="300" />
+<img alt="Alt text" src="../../images/uwb/uwb-13.png" width="300" />  </li>
 <li>Check measurements using ROS<br />
 To check out UWB readings of Crazyflie in ROS2, run the following command in the workspace
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ros2<span class="w"> </span>launch<span class="w"> </span>crazyflie<span class="w"> </span>launch.py<span class="w"> </span>backend:<span class="o">=</span>cflib
@@ -949,12 +949,12 @@ To see the content of each topic, run<br />
 TBD
 <strong>Note</strong>: The default settings in our code in the repository ‘ASIG-Fly’ has enabled the access of custom topic /cfx/imu_data and /cfx/uwb_data. 
 The topic <code>/cf2/imu_data</code> outputs 6-axis IMU data <code>["acc.x", "acc.y", "acc.z", "gyro.x", "gyro.y", "gyro.z"]</code>, with accelerometer readings of unit g (9.81m/s^2) and gyroscope readings of unit degree/s.<br />
-<img alt="Alt text" src="../images/uwb/uwb-20.png" width="300" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-20.png" width="300" /><br />
 The topic <code>/cf2/uwb_data</code> outputs the distance between the tag and the anchor in TWR mode.
-<img alt="Alt text" src="../images/uwb/uwb-21.png" width="300" /><br />
+<img alt="Alt text" src="../../images/uwb/uwb-21.png" width="300" /><br />
 The following instructions show how to modify them or add UWB measurements from more anchors.
 Go to the config file <code>crazyswarm2/crazyswarm2/crazyflie/config/crazyflies.yaml</code> <a href="../TBD">here</a>, under <code>all/firmware_logging/custom_topics</code>, change the <code>vars</code> to what we desire and <code>frequency</code>.<br />
-<img alt="Alt text" src="../images/uwb/uwb-22.png" width="400" />  </li>
+<img alt="Alt text" src="../../images/uwb/uwb-22.png" width="400" />  </li>
 <li>Additional reference:<br />
 Log IMu data: <a href="https://github.com/IMRCLab/crazyswarm2/issues/601">https://github.com/IMRCLab/crazyswarm2/issues/601</a><br />
 Log UWB data: <a href="https://github.com/USC-ACTLab/crazyswarm/issues/283">https://github.com/USC-ACTLab/crazyswarm/issues/283</a><br />
@@ -1070,6 +1070,10 @@ UWB anchor stand 3D print: <a href="https://github.com/bitcraze/bitcraze-mechani
     
     
       <script src="../../assets/javascripts/bundle.3809e150.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

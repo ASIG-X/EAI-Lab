@@ -18,9 +18,9 @@ conda deactivate
 2. Download the Loco Positioning node firmware.  
 3. Update the nodes.  
 **Note 1**: Updating the LPS node through firmware may take several minutes. After clicking the `Update` button, it turns grey, and it is normal for the progress bar to remain 0% for about a minute before showing any values.  
-![Alt text](images/uwb/uwb-1.png)  
+![Alt text](../images/uwb/uwb-1.png)  
 **Note 2**: If you run into the following issue, restarting the computer solves the problem.  
-![Alt text](images/uwb/uwb-2.png){ width="500" }  
+![Alt text](../images/uwb/uwb-2.png){ width="500" }  
 4. Configuring the nodes into anchors.
 
 ## Loco Positioning System (LPS) usage
@@ -30,23 +30,23 @@ A complete anchor set should resemble the configuration shown in the following p
 **Note 1**: The numbers in the top-right corner indicate the anchor IDs.  
 **Note 2**: When connecting or disconnecting a power bank, always plug and unplug the cable from the power bank end. This approach is easier and helps protect the micro-USB port on the anchor board from wear or damage.  
 **Note 3**: make sure all powerbanks have enough power the day before conducting experiments.  
-![Alt text](images/uwb/uwb-3.png){ width="400" }  
+![Alt text](../images/uwb/uwb-3.png){ width="400" }  
 2. Turn on the *Crazyflie*.  
 **Note**: Communication between the computer and the anchors is relayed through *Crazyflie*.  
 Therefore, a *Crazyflie* equipped with an active [Loco Positioning Deck](https://store.bitcraze.io/products/loco-positioning-deck) must be powered on in order for the anchors to be successfully detected in both *cfclient* and the ROS 2 driver.  
-![Alt text](images/uwb/uwb-4.png){ width="400" }  
+![Alt text](../images/uwb/uwb-4.png){ width="400" }  
 3. Check anchor status in *cfclient*.  
 Go to the `Loco Positioning` tab ->  
 Check the `Crazyflie status` panel.  
 Anchors that are successfully detected are shown in green boxes, while undetected anchors are shown in red.  
 The reference image below illustrates a successful detection of anchors `0`~`5`, while anchors `6` and `7` are not detected. (Currently, only six anchors are required for localization.)  
 Green dots represent the anchor locations, and the blue dot indicates the estimated tag position. Walk around the space and observe whether the blue dot provides reasonable position estimates.  
-![Alt text](images/uwb/uwb-5.png)  
+![Alt text](../images/uwb/uwb-5.png)  
 4. Place the anchors according to the layout shown in the reference image above.  
 In the current setup, anchors `0`~`3` are placed on the ground, while anchors `4` and `5` are mounted on the pole. The figure below shows a top-down view of the configuration. All dimensions are given in meters.  
-![Alt text](images/uwb/uwb-7.png)  
+![Alt text](../images/uwb/uwb-7.png)  
 **Note 1**: Anchor `0` defines the origin of the coordinate frame. The positions of all other anchors are specified relative to this anchor.  
-![Alt text](images/uwb/uwb-8.png){ width="200" }  
+![Alt text](../images/uwb/uwb-8.png){ width="200" }  
 Current anchor positions `[x,y,z]` in meters (they correspond to the coordinates in the step below):
 ```m
 an_0: [0.00, 0.00, 0.00]
@@ -57,16 +57,16 @@ an_4: [0.00, 2.40, 2.00]
 an_5: [2.70, 2.40, 2.00]
 ```
 **Note 2**: The anchor antenna is located at the orange-marked area shown below. Ensure that this point is positioned according to the dimensions specified above. The lab floor mat has dimensions of `0.3 × 0.3` m², which can be used as a convenient reference when arranging the anchors.  
-![Alt text](images/uwb/uwb-9.png){ width="400" }  
+![Alt text](../images/uwb/uwb-9.png){ width="400" }  
 **Note 3**: When placing anchors `4` and `5`, align the bottom of each anchor stand with the marked line on the pole.  
-![Alt text](images/uwb/uwb-10.png){ width="300" }
-![Alt text](images/uwb/uwb-11.png){ width="325" }  
+![Alt text](../images/uwb/uwb-10.png){ width="300" }
+![Alt text](../images/uwb/uwb-11.png){ width="325" }  
 5. Configure anchor positions (**skip this step** if the anchor locations do not need to be changed).  
 Click `Get from anchors` to load the current anchor configuration.
 When you select and modify a coordinate, it will turn red to indicate an unsaved change. 
 After making the necessary updates, click `Write to anchors` to save the new configuration. Once the process is complete, all blocks should turn green, as shown in the reference image on the right.
-![Alt text](images/uwb/uwb-12.png){ width="300" }
-![Alt text](images/uwb/uwb-13.png){ width="300" }  
+![Alt text](../images/uwb/uwb-12.png){ width="300" }
+![Alt text](../images/uwb/uwb-13.png){ width="300" }  
 6. Check measurements using ROS  
 To check out UWB readings of Crazyflie in ROS2, run the following command in the workspace
 ```sh
@@ -100,12 +100,12 @@ python3 ./convertROSbag2Txt.py recorded_bag1 /cf2/imu_data /cf2/uwb_data recorde
 TBD
 **Note**: The default settings in our code in the repository ‘ASIG-Fly’ has enabled the access of custom topic /cfx/imu_data and /cfx/uwb_data. 
 The topic `/cf2/imu_data` outputs 6-axis IMU data `["acc.x", "acc.y", "acc.z", "gyro.x", "gyro.y", "gyro.z"]`, with accelerometer readings of unit g (9.81m/s^2) and gyroscope readings of unit degree/s.  
-![Alt text](images/uwb/uwb-20.png){ width="300" }  
+![Alt text](../images/uwb/uwb-20.png){ width="300" }  
 The topic `/cf2/uwb_data` outputs the distance between the tag and the anchor in TWR mode.
-![Alt text](images/uwb/uwb-21.png){ width="300" }  
+![Alt text](../images/uwb/uwb-21.png){ width="300" }  
 The following instructions show how to modify them or add UWB measurements from more anchors.
 Go to the config file `crazyswarm2/crazyswarm2/crazyflie/config/crazyflies.yaml` [here](TBD), under `all/firmware_logging/custom_topics`, change the `vars` to what we desire and `frequency`.  
-![Alt text](images/uwb/uwb-22.png){ width="400" }  
+![Alt text](../images/uwb/uwb-22.png){ width="400" }  
 13. Additional reference:  
 Log IMu data: https://github.com/IMRCLab/crazyswarm2/issues/601  
 Log UWB data: https://github.com/USC-ACTLab/crazyswarm/issues/283  
