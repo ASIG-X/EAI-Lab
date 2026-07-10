@@ -14,9 +14,8 @@ Click on `3D`, place the cap on the ground and check if it can be found in `3D` 
 
 ## Launching Qualisys ROS2 driver and collect data
 1. Clone and build the driver  
-2. Set host_name in file `mocap_ws/src/mocap4ros2_qualisys/qualisys_driver/config/qualisys_driver_params.yaml` to the local WiFi IP address  
-e.g., `192.168.0.50` for Visionen  
-3. Connect to the local WiFi (`Visionen`. No password is required)  
+2. Set host_name in file `mocap_ws/src/mocap4ros2_qualisys/qualisys_driver/config/qualisys_driver_params.yaml` to the local WiFi IP address    
+3. Connect to the local WiFi   
 4. Commands to launch node and record data:
 ```sh
 ros2 launch qualisys_driver qualisys.launch.py 

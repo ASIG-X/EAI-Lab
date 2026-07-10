@@ -4,6 +4,9 @@ icon: lucide/rocket
 
 # Embodied AI Lab for Education
 
+add a picture of whole lab, including stairs, green dog, four wooden stands, camera tracking
+add pictures of handheld
+
 For full documentation visit [zensical.org](https://zensical.org/docs/).
 
 ## Commands

@@ -46,13 +46,11 @@ Copyright &copy; 2026 ASIG Lab
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
   { "Get started" = "index.md" },
-  { "Motion Capture" = [
-    "mocap/camera_tracking.md",
-    "mocap/drone.md",
-    "mocap/uwb.md",
-    "mocap/vins_mono.md",
-    "mocap/gloves.md",
-  ]},
+  { "Camera Tracking" = "mocap/camera_tracking.md" },
+  { "Drones" = "mocap/drone.md" },
+  { "UWB" = "mocap/uwb.md" },
+  { "Visual Inertial Odometry" = "mocap/vins_mono.md" },
+  { "Hand Tracking" = "mocap/gloves.md" },
   { "Unitree Go2" = [
     "go2/go2_mujoco.md",
     "go2/go2_isaaclab.md",
