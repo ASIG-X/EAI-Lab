@@ -1,7 +1,7 @@
 # MuJoCo Playground Training
 This instruction explains how to train a [Unitree Go2 quadruped](https://www.unitree.com/go2) to track commanded velocities using [*Reinforcement Learning (RL)*](https://en.wikipedia.org/wiki/Reinforcement_learning) in [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground/). To follow the steps, refer to our [customized open-source repository](TBD).
 
-**Task**: Track body-frame planar velocity commands:  $\mathbf{c} = [v_x^c, v_y^c, \omega_z^c]$  
+**Task**: Track body-frame planar velocity commands: $\mathbf{c} = [v_x^c, v_y^c, \omega_z^c]$  
 where $v_x$ and $v_y$ are the commanded linear velocities in the robot’s body frame, and $\omega_z$ is the commanded yaw rate.  
 **RL algorithm:** [Proximal Policy Optimization (PPO)](https://arxiv.org/pdf/1707.06347)  
 
@@ -80,7 +80,7 @@ The full rewards, reward scales and definitions are listed below:
 | `stand_still` | `-1.0` | $\mathbb{1}_{\lVert\mathbf{c}\rVert_2<0.01}\sum_{j=1}^{12}\left\|q_j-q_j^{\mathrm{default}}\right\|$ |
 | `energy` | `-0.001` | $\sum_{j=1}^{12}\left \| \dot{q}_j\right\| \cdot \left\|\tau_j\right\|$ |
 
-### Domain Randomization (TO BE FINISHED)
+### Domain Randomization
 [Domain randomization](https://arxiv.org/pdf/1703.06907) is used to reduce overfitting, improve robustness, and prepare the controller for deployment conditions. 
 
 | Quantity | Distribution |
@@ -89,7 +89,8 @@ The full rewards, reward scales and definitions are listed below:
 | Body mass and inertia scale | `U(0.85, 1.15)` |
 | Proportional gain `Kp` | `U(25.0, 45.0)` |
 | Derivative gain `Kd` | `U(0.3, 1.6)` |
-| Torso COM offset | x/y `+/-0.05 m`, z `+/-0.04 m` |
+| COM offset | x/y `+/-0.05 m`, z `+/-0.04 m` |
+| External Push  | `U(-1.0, 1.0)` |
 
 
 ### Environment Configuration
@@ -99,7 +100,7 @@ The full rewards, reward scales and definitions are listed below:
 | Control step, `ctrl_dt` | `0.02 s` (50 Hz) |
 | Physics substeps per action | `5` |
 | Nominal episode length | `5,000` control steps (100 s) |
-| Sampled time limit | `3,750–6,250` steps (75–125 s) |
+| Sampled time limit | `3,750 - 6,250` steps (75 - 125 s) |
 | Nominal PD gains | `Kp = 35.0`, `Kd = 0.5` |
 | Soft joint-limit factor | `0.95` |
 
@@ -147,8 +148,8 @@ It is necessary to speficy `play-only`, `load_run_name`, and `checkpoint_num` (o
 train-rsl-ppo \
 --env_name=Go2JoystickFlatTerrain \
 --play_only \
---load_run_name=Go2JoystickFlatTerrain-20260610-225951 \  # choose specific run_name
---checkpoint_num=3000  # choose specific checkpoint, if not specified, the last checkpoint is automatically chosen
+--load_run_name=<run_name> \  # choose specific run_name
+--checkpoint_num=<number>  # optional, choose specific checkpoint, if not specified, the last checkpoint is automatically chosen
 ```
 
 ## Export policy in ONNX format
@@ -157,7 +158,9 @@ This is for sim-to-sim validation and real-world deployment, we use [ONNX format
 train-rsl-ppo \
 --env_name=Go2JoystickFlatTerrain \
 --export_onnx_only \
---load_run_name=ppo_baseline_iter5000_nofclear-20260617-2047 \
---checkpoint_num=3000
+--load_run_name=<run_name> \
+--checkpoint_num=<number>
 ```
 
+## Sim-to-Sim Validation & Deployment
+Refer to next section of deployment.

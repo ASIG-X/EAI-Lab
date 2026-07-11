@@ -67,7 +67,7 @@ First install dependencies:
 
 - Install ROS2 Humble following [this guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
 
-- Install (unitree_sdk2)[https://github.com/unitreerobotics/unitree_sdk2]
+- Install [unitree_sdk2](https://github.com/unitreerobotics/unitree_sdk2)
 
 - Install other dependencies
 ```base
@@ -76,7 +76,7 @@ sudo apt install libeigen3-dev libfmt-dev
 
 - Install onnxruntime
 
-    * Go to the (release page)[https://github.com/microsoft/onnxruntime/releases] and download prebuilt binaries. 
+    * Go to the [release page](https://github.com/microsoft/onnxruntime/releases) and download prebuilt binaries. 
     Please download this file (tested): onnxruntime-linux-x64-gpu-1.22.0.tgz
 
     * Extract the folder and copy the “include” folder to “/usr/local”.

@@ -1,11 +1,12 @@
 # Real-Robot Deployment
+We mount a [Jetson Orin AGX 64GB](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/) on the [Unitree Go2](https://www.unitree.com/go2) robot. For detailed hardware information, please refer to [REASAN](https://arxiv.org/pdf/2512.09537v1).
 
-## Nvidia Jetson AGX Orin
+
+## NVIDIA Jetson AGX Orin Setup
 
 ### Flash the System
 
-- Hardware setup follow
-[guidance](https://developer.nvidia.com/embedded/learn/jetson-agx-orin-devkit-user-guide/two_ways_to_set_up_software.html#hardware-setup)
+- Hardware setup follow the [guidance](https://developer.nvidia.com/embedded/learn/jetson-agx-orin-devkit-user-guide/two_ways_to_set_up_software.html#hardware-setup)
     - First finish L4T BSP flash step
 - SDK Manager Step1
     - choose **Jetson AGX Orin \[64GB developer kit version\],  JetPack 6.2.1**  
@@ -59,9 +60,65 @@ This may be caused by `sudo apt update` and `upgrade` at initial setups of ubunt
 - SDK Manager Step 4  
 ![](../images/jetson/component_6.png)
 
-# TODO:
+## TODO:
 
 deployment wifi, jetson
 
 refer to paper
 
+## MuJuCo Playground Policy Deployment
+Refer to deploy [here](TBD).  
+![](../images/go2/mujocopg-deploy.gif){width=500}
+
+1. Export Policy into ONNX format file.  
+```sh
+train-rsl-ppo \
+  --env_name=Go2JoystickFlatTerrain \
+  --export_onnx_only \
+  --load_run_name=<run_name> \
+  --checkpoint_num=<checkpoint>
+```
+2. Check and revise `config.yaml`.  
+In real robot deployment, some parameters (e.g. `Kp` and `Kd`) need to be adjusted based on different robot.  
+Set the correct exported policy path: 
+```yaml
+policy:
+  path: "model/policy_deploy.onnx"
+```
+For the real robot, enable `unitree_services`:
+```yaml
+unitree_services:
+  enable: true
+```  
+**Note**: This makes the node call Unitree `SportClient::StandDown()` and `MotionSwitcherClient::ReleaseMode()` before low-level control. For MuJoCo sim-to-sim validation, set `unitree_services` to be `false`.  
+The ROS2 node expects:  
+```text
+input:  obs      [1, 450]
+output: actions  [1, 12]
+```  
+During policy control, the ROS2 node publishes two 12-joint messages in Unitree SDK motor order (`FR`, `FL`, `RR`, `RL`, with `hip`/`thigh`/`calf` for each leg):  
+```text
+- /network_output_raw: unscaled policy actions after finite-value handling and the configured `action_clip`.
+- /target_action: final joint-angle commands, computed as `default_angles + network_output_raw * action_scale`.
+```  
+3. Build the workspace.  
+Source the ROS 2 and Unitree SDK environment first, then:  
+```sh
+cd deploy
+./run_build.sh
+source install/share/go2_joystick_deploy/local_setup.bash
+```  
+**Note**: Source `install/share/go2_joystick_deploy/local_setup.bash` in every terminal
+that uses ROS CLI tools with the custom `JointAngularPositions` message.  
+4. Run With Unitree MuJoCo
+```sh
+cd deploy
+./locomotion_node --net lo --config config.yaml
+```  
+In another terminal, run the existing command publisher:  
+```sh
+python ../deploy/terminal_cmd.py  # or wireless_cmd.py to use joystick controller
+```  
+5. **Real Robot Notes**  
+On shutdown or `Ctrl`+`C`, the node interpolates to `sit_angles` and then sends a
+damping command.
