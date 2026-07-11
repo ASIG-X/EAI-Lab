@@ -153,84 +153,27 @@ python terminal_control.py
 
 ### Flash Jetson Orin AGX
 
-First we need to flash Nvidia Jetson Orin AGX with packages like cuda, cudnn, tensorrt and so on.
+First we need to flash Nvidia Jetson Orin AGX and install SDK packages like cuda, cudnn, tensorrt and so on.
+Check the [deployment docuement](go2_deployment.md) for details on flashing the system and installing components.
 
+### Install Dependencies
 
-First, install ROS2 Humble, unitree\_sdk2, libeigen3-dev and libfmt-dev on Jetson Orin similarly as described previously.
-
-Then we will install onnxruntime with TensorRT backend. Check [this](https://onnxruntime.ai/docs/build/eps.html#tensorrt) for a more comprehensive guide.
-
-Jetpack should already come with CUDA, cuDNN, and TensorRT.
-
-Now we just need to install onnxruntime.
-
-```shell
-cd
-git clone https://github.com/microsoft/onnxruntime.git --branch v1.22.2
-cd onnxruntime
-
-# TODO: the paths to CUDA, cuDNN and TensorRT need to be verified
-./build.sh --config Release --parallel --cmake_extra_defines 'CMAKE_CUDA_ARCHITECTURES=native' --cudnn_home /usr/lib/x86_64-linux-gnu/ --cuda_home /usr/local/cuda --use_tensorrt --tensorrt_home /usr/local
-
-# TODO: build folder needs verification
-cd build
-# TODO: installation needs verification
-sudo make install
-```
-
-Now go back to your laptop and copy the deployment code to Jetson. Make sure your laptop and Jetson are on the same subnet and can ping each other.
-
-```shell
-scp -r asig_sim2real/deployment username@xxx.xxx.xxx.xxx:~/go2_deployment
-```
-
-Now you can ssh into Jetson and start the deployment:
-
-```shell
-# ssh into Jetson
-ssh username@xxx.xxx.xxx.xxx
-
-# get two terminals. in one terminal run:
-cd go2_deployment
-./run_build.sh
-# you can get the network interface connecting to the robot with ifconfig
-./locomotion_node --policy policy_1 --net XXX
-
-# in another terminal, run:
-cd go2_deployment
-python terminal_control.py
-
-# now you can control the robot as in MuJoCo
-```
-
-## **Jetson AGX Orin Deployment step-by-step configuration**
-
-1. Initial Setup for Jetson AGX Orin   
-   1. Flash Orin: Follow our [step-by-step flashing tutorial](?tab=t.v9bhny4sguw0#heading=h.vyhnccxlee7a)  
-      1. Get into ubuntu and finish initial setups  
-         Username: asig1, asig2, asig3  
-         Password: asigorin  
-      2. Do **NOT** run sudo apt update ,  sudo apt upgrade and sudo apt dist-upgrade after flashing, this may cause some packages version mismatch at step 1.b  
-   2. Install basic Cuda, Cudnn, TensorRT using SDK manager, follow our [step-by-step installing tutorial](?tab=t.v9bhny4sguw0)  
-      1. If you install these packages in ubuntu terminal, some versions are incorrect, make sure you use SDK manager to install
-
-	  
-After installation, get into Jetson AGX Orin ubuntu system  
-	Open terminal and check whether CUDA is installed correctly
-
-```shell
+Log into Jetson AGX Orin ubuntu system and check whether required packages are installed correctly:
+```bash
 nvcc –version
 ls -l /usr/local/cuda
 ls /usr/lib/aarch64-linux-gnu/libcudnn*
 ls /usr/lib/aarch64-linux-gnu/libnvinfer*
 ```
+If not, you can try to follow the components installation guide again.
 
-2. Install [ROS2 humble](https://docs.ros.org/en/humble/index.html)  
-3. Install [unitree sdk2](https://github.com/unitreerobotics/unitree_sdk2)  
-4. Install [unitree sdk2 python](https://github.com/unitreerobotics/unitree_sdk2_python) follow their official processes  
-   1. When following FAQ1 last code block, change commands as follows:
+Install [ROS2 humble](https://docs.ros.org/en/humble/index.html).
 
-```shell
+Install [unitree sdk2](https://github.com/unitreerobotics/unitree_sdk2).
+
+Install [unitree sdk2 python](https://github.com/unitreerobotics/unitree_sdk2_python) follow their official guide.
+When following the last code block of FAQ-1, change the commands to:
+```bash
 #use the following commands instead of those given in repository
 cd ~/unitree_sdk2_python
 export CYCLONEDDS_HOME=/home/usrname/cyclonedds/install
@@ -240,86 +183,89 @@ export CYCLONEDDS_HOME=$HOME/cyclonedds/install
 pip3 install -e . --no-build-isolation
 ```
 
-5. Install [livox ros2 driver](https://github.com/Livox-SDK/livox_ros_driver2)  
-   1. In [this guidance](https://github.com/Livox-SDK/Livox-SDK2/blob/master/README.md) 2.2 step2, run this command, then run step3
-
-```shell
-sudo apt install cmake build-essential
-```
-
-   2. In [step 2.3](https://github.com/Livox-SDK/livox_ros_driver2?tab=readme-ov-file#23-build-the-livox-ros-driver-2), in the folder ws\_livox/ src/livoc\_ros\_driver2/  run ./build.sh humble  
-   3. In [step 2.4](https://github.com/Livox-SDK/livox_ros_driver2?tab=readme-ov-file#24-run-livox-ros-driver-2), run
-
-```shell
-source ../../install/setup.sh
-ros2 launch livox_ros_driver2 msg_MID360_launch.py
-```
-
-6. Install [camera tracking driver](https://github.com/MOCAP4ROS2-Project/mocap4ros2_qualisys)  
-   1. In setup your qualisys configuration step, 
-
-```shell
-gedit mocap_ws/src/mocap4ros2_qualisys/qualisys_driver/config/qualisys_driver_params.yaml
-# then revise host address to your own ip address
-# need to recompile
-cd ~/mocap_ws
-colcon build --symlink-install
-source install/setup.bash
-```
-
-7. Install dependencies:
-
-```shell
+Install required packages for the deployment code:
+```bash
 sudo apt install libeigen3-dev libfmt-dev
 ```
 
-8. Install onnxruntime, compile procedures are based on [official manuscript](https://onnxruntime.ai/docs/build/eps.html#nvidia-jetson-tx1tx2nanoxavierorin)  
-   1. Onnxruntime v1.23.2:  **install from source**
+Install onnxruntime, compile procedures are based on [official manuscript](https://onnxruntime.ai/docs/build/eps.html#nvidia-jetson-tx1tx2nanoxavierorin).
 
-```shell
-git clone --recursive https://github.com/microsoft/onnxruntime
+   - Onnxruntime v1.23.2:  **install from source**
+   ```bash
+   git clone --recursive https://github.com/microsoft/onnxruntime
 
-sudo apt install -y --no-install-recommends \
-  build-essential software-properties-common libopenblas-dev \
-  libpython3.10-dev python3-pip python3-dev python3-setuptools python3-wheel
-```
+   sudo apt install -y --no-install-recommends \
+   build-essential software-properties-common libopenblas-dev \
+   libpython3.10-dev python3-pip python3-dev python3-setuptools python3-wheel
+   ```
+   - Install cmake 3.28.5, find files in [https://cmake.org/files/v3.28/](https://cmake.org/files/v3.28/).
+   Choose [`cmake-3.28.5-linux-aarch64.sh`](https://cmake.org/files/v3.28/cmake-3.28.5-linux-aarch64.sh).
+   ```bash
+   chmod +x ./cmake-3.28.5-linux-aarch64.sh
+   sudo ./cmake-3.28.5-linux-aarch64.sh --prefix=/usr/local
 
-   2. Install cmake 3.28.5, find files in [https://cmake.org/files/v3.28/](https://cmake.org/files/v3.28/)  
-      Choose [`cmake-3.28.5-linux-aarch64.sh`](https://cmake.org/files/v3.28/cmake-3.28.5-linux-aarch64.sh)
+   # check cmake version; should be 3.28 now
+   cmake --version
 
-```shell
-chmod +x ./cmake-3.28.5-linux-aarch64.sh
-sudo ./cmake-3.28.5-linux-aarch64.sh --prefix=/usr/local
+   # if you encounter errors or version not update, reboot may simply solve problem
+   ```
+   - Go to cloned [`onnxruntime`](https://github.com/microsoft/onnxruntime) project.
+   Make sure you set **onnxruntime\_BUILD\_UNIT\_TESTS=OFF** , more details in [github](https://github.com/microsoft/onnxruntime/issues/26425).
+   ```bash
+   ./build.sh --config Release --update --build --parallel --use_tensorrt --cuda_home /usr/local/cuda --cudnn_home /usr/lib/aarch64-linux-gnu --tensorrt_home /usr/lib/aarch64-linux-gnu --skip_tests --cmake_extra_defines 'CMAKE_CUDA_ARCHITECTURES=native''onnxruntime_BUILD_UNIT_TESTS=OFF' --build_shared_lib
 
-# check cmake version; should be 3.28 now
-cmake --version
+   cd build/Linux/Release
+   sudo make install
 
-# if you encounter errors or version not update, reboot may simply solve problem
-```
+   cd /usr/local/lib/cmake/onnxruntime
+   sudo vim ./onnxruntimeTargets-release.cmake
+   # change all "lib64" to "lib" and save
+   ```
 
-   3. Cd to cloned [`onnxruntime`](https://github.com/microsoft/onnxruntime) project   
-      Make sure you set **onnxruntime\_BUILD\_UNIT\_TESTS=OFF** , more details in [github](https://github.com/microsoft/onnxruntime/issues/26425)
+### Build Deployment Code
 
-```shell
-./build.sh --config Release --update --build --parallel --use_tensorrt --cuda_home /usr/local/cuda --cudnn_home /usr/lib/aarch64-linux-gnu --tensorrt_home /usr/lib/aarch64-linux-gnu --skip_tests --cmake_extra_defines 'CMAKE_CUDA_ARCHITECTURES=native''onnxruntime_BUILD_UNIT_TESTS=OFF' --build_shared_lib
-
-cd build/Linux/Release
-sudo make install
-
-cd /usr/local/lib/cmake/onnxruntime
-sudo vim ./onnxruntimeTargets-release.cmake
-# change all "lib64" to "lib" and save
-```
-
-   4. Clone the code and build deployment nodes
-
-```shell
+```bash
 # before run this, make sure you source livox_driver, mocap and unitree driver first
 
 cd ~/asig_sim2real/deployment
 ./run_build.sh
 
-# if you encounter onnxruntime error again, 
+# if you encounter onnxruntime error again, run this:
 sudo cp -r /usr/local/include/onnxruntime /usr/local/include/
 ```
 
+### Deploy and Control
+
+Make sure your Jetson is in the same subnet as your PC.
+For example, Jetson IP can be 192.168.20.1, and the IP of your PC can be 192.168.20.2.
+On both computers, set the network IPv4 to be manual, and the network mask should be 255.255.255.0.
+After this, you should be able to communicate with ROS2 on both computers.
+Then, similarly to the Sim-to-Sim deployment, run the control script on your PC, and run the deployment code on Jetson:
+```bash
+# on your pc
+python terminal_control.py
+
+# on jetson
+export NET_INTERFACE=network # network interface name on jetson connecting to the robot (e.g., eno1)
+./locomotion_node --net <network interface> --policy loco_policy # or loco_policy
+```
+
+## DISCLAIMER
+
+***WARNING — REAL ROBOT DEPLOYMENT***
+
+Always validate your controller in MuJoCo simulation before deploying
+to hardware. This document is provided as-is, for reference only, with
+no guarantee of correctness or safety.
+
+Real robots can move suddenly and with significant force. Hardware and
+software setups vary, and behavior that works in simulation may fail
+on hardware. Before running anything:
+
+- Keep an emergency stop within reach at all times
+- Clear the workspace of people and obstacles
+- Start with reduced torque/velocity limits
+- Never assume the robot will behave as expected
+
+You are solely responsible for ensuring the safety of people and
+equipment when using this document and the accompanying code.
