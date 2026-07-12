@@ -45,12 +45,12 @@ Copyright &copy; 2026 ASIG Lab
 #
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
-  { "Get started" = "index.md" },
+  { "Get started" = "start.md" },
   { "Qualisys Camera Tracking" = "mocap/camera_tracking.md" },
   { "Crazyflie 2.1+" = "mocap/drone.md" },
   { "UWB Network Localization" = "mocap/uwb.md" },
-  { "Visual Inertial Odometry" = "mocap/vins_mono.md" },
-  { "Lidar Inertial Odometry" = "mocap/resple.md" },
+  { "Visual-Inertial Odometry" = "mocap/vins_mono.md" },
+  { "LiDAR-inertial Odometry" = "mocap/resple.md" },
   { "MANUS Gloves" = "mocap/gloves.md" },
   { "Unitree Go2 Sim-to-Real" = [
     "go2/go2_start.md",
@@ -59,7 +59,6 @@ nav = [
     "go2/go2_deployment.md",
   ]},
   { "Acknowledgements" = "acknowledgements.md" },
-  { "Markdown" = "markdown.md" },
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize

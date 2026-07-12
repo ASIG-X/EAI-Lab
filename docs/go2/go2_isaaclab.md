@@ -1,4 +1,4 @@
-# IsaacLab Training
+# IsaacLab
 
 Code is available [here](https://github.com/ASIG-X/asig_sim2real).
 
