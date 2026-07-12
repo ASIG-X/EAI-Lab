@@ -1,4 +1,4 @@
-# Camera Tracking 
+# Qualisys Camera Tracking 
 
 Refer to Qualisys Motion Capture system
 

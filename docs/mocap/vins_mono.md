@@ -1,4 +1,4 @@
-# VINS-Mono Demonstrator
+# VINS-Mono Demonstration
 
 This is instruction of using our handheld demonstrator for [VINS-Mono](https://ieeexplore.ieee.org/document/8421746), which is a classical monocular visual SLAM system. The [original repository](https://github.com/HKUST-Aerial-Robotics/VINS-Mono) targets ROS1, therefore we use a [modified version](https://github.com/dongbo19/VINS-MONO-ROS2)for ROS2 as the base of our code.
 

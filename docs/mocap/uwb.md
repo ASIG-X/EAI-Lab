@@ -1,4 +1,4 @@
-# Ultra-wideband (UWB) Instruction
+# Ultra-wideband (UWB) Network Localization
 
 ## Loco Positioning System (LPS) configuration
 

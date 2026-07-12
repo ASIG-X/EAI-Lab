@@ -1,4 +1,4 @@
-# Drone Instruction
+# Crazyflie 2.1+ Drone
 
 ## Configuration
 ### Install the Crazyflie Client (cfclient)

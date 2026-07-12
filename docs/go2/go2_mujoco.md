@@ -162,5 +162,62 @@ train-rsl-ppo \
 --checkpoint_num=<number>
 ```
 
-## Sim-to-Sim Validation & Deployment
-Refer to next section of deployment.
+## Sim-to-Sim Validation
+Please refer to Isaaclab Training *Sim-to-Sim Deployment with MuJoCo* section for details.
+
+## Real-world Deployment
+Refer to deploy [here](TBD).  
+![](../images/go2/mujocopg-deploy.gif){width=500}
+
+1. Export Policy into ONNX format file.  
+```sh
+train-rsl-ppo \
+  --env_name=Go2JoystickFlatTerrain \
+  --export_onnx_only \
+  --load_run_name=<run_name> \
+  --checkpoint_num=<checkpoint>
+```
+2. Check and revise `config.yaml`.  
+In real robot deployment, some parameters (e.g. `Kp` and `Kd`) need to be adjusted based on different robot.  
+Set the correct exported policy path: 
+```yaml
+policy:
+  path: "model/policy_deploy.onnx"
+```
+For the real robot, enable `unitree_services`:
+```yaml
+unitree_services:
+  enable: true
+```  
+**Note**: This makes the node call Unitree `SportClient::StandDown()` and `MotionSwitcherClient::ReleaseMode()` before low-level control. For MuJoCo sim-to-sim validation, set `unitree_services` to be `false`.  
+The ROS2 node expects:  
+```text
+input:  obs      [1, 450]
+output: actions  [1, 12]
+```  
+During policy control, the ROS2 node publishes two 12-joint messages in Unitree SDK motor order (`FR`, `FL`, `RR`, `RL`, with `hip`/`thigh`/`calf` for each leg):  
+```text
+- /network_output_raw: unscaled policy actions after finite-value handling and the configured `action_clip`.
+- /target_action: final joint-angle commands, computed as `default_angles + network_output_raw * action_scale`.
+```  
+3. Build the workspace.  
+Source the ROS 2 and Unitree SDK environment first, then:  
+```sh
+cd deploy
+./run_build.sh
+source install/share/go2_joystick_deploy/local_setup.bash
+```  
+**Note**: Source `install/share/go2_joystick_deploy/local_setup.bash` in every terminal
+that uses ROS CLI tools with the custom `JointAngularPositions` message.  
+4. Run With Unitree MuJoCo
+```sh
+cd deploy
+./locomotion_node --net lo --config config.yaml
+```  
+In another terminal, run the existing command publisher:  
+```sh
+python ../deploy/terminal_cmd.py  # or wireless_cmd.py to use joystick controller
+```  
+5. **Real Robot Notes**  
+On shutdown or `Ctrl`+`C`, the node interpolates to `sit_angles` and then sends a
+damping command.
