@@ -1,5 +1,5 @@
 # MuJoCo Playground
-This instruction explains how to train a [Unitree Go2 quadruped](https://www.unitree.com/go2) to track commanded velocities using [*Reinforcement Learning (RL)*](https://en.wikipedia.org/wiki/Reinforcement_learning) in [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground/). To follow the steps, refer to our [customized open-source repository](TBD).
+This instruction explains how to train a [Unitree Go2 quadruped](https://www.unitree.com/go2) to track commanded velocities using [*Reinforcement Learning (RL)*](https://en.wikipedia.org/wiki/Reinforcement_learning) in [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground/). To follow the steps, refer to our [customized open-source repository](https://github.com/ASIG-X/leg-mujoco).
 
 **Task**: Track body-frame planar velocity commands: $\mathbf{c} = [v_x^c, v_y^c, \omega_z^c]$  
 where $v_x$ and $v_y$ are the commanded linear velocities in the robot’s body frame, and $\omega_z$ is the commanded yaw rate.  
@@ -128,7 +128,7 @@ The full rewards, reward scales and definitions are listed below:
 
 
 ## Installation
-Clone our [customized open-sourced repository](TBD) and install *MuJoCo Playground* following [official guidance](https://github.com/google-deepmind/mujoco_playground/).  
+Clone our [customized open-sourced repository](https://github.com/ASIG-X/leg-mujoco) and install *MuJoCo Playground* following [official guidance](https://github.com/google-deepmind/mujoco_playground/).  
 Here we create a conda virtual environment for this task.  
 ```sh
 conda create -n env_mujocoplayground python=3.12 -y  
@@ -163,26 +163,20 @@ train-rsl-ppo \
 ```
 
 ## Sim-to-Sim Validation
-Please refer to Isaaclab Training *Sim-to-Sim Deployment with MuJoCo* section for details.
+Please refer to Isaaclab Training [*Sim-to-Sim Deployment with MuJoCo*](./go2_isaaclab.md#sim-to-sim-deployment-with-mujoco) section for details.
 
 ## Real-world Deployment
-Refer to deploy [here](TBD).  
+The ROS 2/Unitree deployment code lives in [deploy](https://github.com/ASIG-X/leg-mujoco/deploy/) and runs exported
+ONNX policies for `Go2JoystickFlatTerrain`. Refer to [deploy/README.md](https://github.com/ASIG-X/leg-mujoco/deploy/README.md) for more details.  
 ![](../images/go2/mujocopg-deploy.gif){width=500}
 
-1. Export Policy into ONNX format file.  
-```sh
-train-rsl-ppo \
-  --env_name=Go2JoystickFlatTerrain \
-  --export_onnx_only \
-  --load_run_name=<run_name> \
-  --checkpoint_num=<checkpoint>
-```
+1. Export Policy into ONNX format file and move to `deploy/model/`.
 2. Check and revise `config.yaml`.  
 In real robot deployment, some parameters (e.g. `Kp` and `Kd`) need to be adjusted based on different robot.  
 Set the correct exported policy path: 
 ```yaml
 policy:
-  path: "model/policy_deploy.onnx"
+  path: "model/policy_deploy.onnx"  # match your own file name
 ```
 For the real robot, enable `unitree_services`:
 ```yaml
@@ -219,5 +213,8 @@ In another terminal, run the existing command publisher:
 python ../deploy/terminal_cmd.py  # or wireless_cmd.py to use joystick controller
 ```  
 5. **Real Robot Notes**  
+Hardware setup details depend on the onboard computer, network interface, Unitree
+SDK installation, and robot safety procedure; for a fuller hardware reference,
+see [REASAN](https://github.com/ASIG-X/REASAN).  
 On shutdown or `Ctrl`+`C`, the node interpolates to `sit_angles` and then sends a
 damping command.
