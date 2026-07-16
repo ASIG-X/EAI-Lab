@@ -1,5 +1,5 @@
 # MuJoCo Playground
-This instruction explains how to train a [Unitree Go2 quadruped](https://www.unitree.com/go2) to track commanded velocities using [*Reinforcement Learning (RL)*](https://en.wikipedia.org/wiki/Reinforcement_learning) in [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground/). To follow the steps, refer to our [customized open-source repository](https://github.com/ASIG-X/leg-mujoco).
+This instruction explains how to train a [Unitree Go2 quadruped](https://www.unitree.com/go2) to track commanded velocities using [*Reinforcement Learning (RL)*](https://en.wikipedia.org/wiki/Reinforcement_learning) in [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground/). To follow the steps, refer to our customized [open-source repository](https://github.com/ASIG-X/leg-mujoco).
 
 **Task**: Track body-frame planar velocity commands: $\mathbf{c} = [v_x^c, v_y^c, \omega_z^c]$  
 where $v_x$ and $v_y$ are the commanded linear velocities in the robot’s body frame, and $\omega_z$ is the commanded yaw rate.  
