@@ -88,11 +88,11 @@ The final workspace structure should be:
 ```text
 vio/ 
 ├── ros2_ws/ 
-│ └── src/ 
-│   ├── mocap/ 
-│   ├── mocap4ros2_qualisys/ 
-│   ├── mocap_msgs/ 
-│   └── vins_mono_ros2/ 
+│   └── src/ 
+│       ├── mocap/ 
+│       ├── mocap4ros2_qualisys/ 
+│       ├── mocap_msgs/ 
+│       └── vins_mono_ros2/ 
 ├── eval_trajectory.py 
 └── trajectory_aligner.py
 ```
