@@ -85,7 +85,8 @@ ros2 topic echo xxx # replace ‘xxx’ with the specific topic name, e.g., /cf2
 ros2 bag record -o bag_name -a
 ```
 **Note**: before launching the command, source the respective workspace to make the topics visible.  
-8. Convert recorded bags to .txt file [link](TBD)
+8. Download our code and data from [here](../uwb/uwb-practical.zip).
+9. Convert recorded bags to .txt file (`convertROSbag2Txt.py`)
 ```sh
 # Usage: 
 python3 ./convertROSbag2Txt.py <bag_path> [imu_topic] [uwb_topic] <out_path>

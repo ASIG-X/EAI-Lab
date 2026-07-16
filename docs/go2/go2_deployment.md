@@ -60,3 +60,10 @@ This may be caused by `sudo apt update` and `upgrade` at initial setups of ubunt
 ![](../images/jetson/component_5.png)
 - SDK Manager Step 4  
 ![](../images/jetson/component_6.png)
+
+## Student Project Examples
+
+- **Towards Multimodal Autonomous Exploration Onboard Legged Robot** ([Poster](https://asig-x.github.io/comenius/posters/Kees_2025_MSc_Project.pdf))  
+K. Wierenga, Master’s thesis, MSc Computing Science, University of Groningen (RUG), 2025.  
+- **Towards Reinforcement Learning-Based Quadrupedal Navigation**
+L. M. Quirós, Bachelor’s thesis, University of Groningen (RUG), 2025.

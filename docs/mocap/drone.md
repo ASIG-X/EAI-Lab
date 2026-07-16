@@ -143,3 +143,9 @@ It can be resolved by commenting out the code block between lines `198` and `203
 3. The *Crazyflie* battery is charged using the device shown below.  
 Connect the battery to one end of the charger and the micro-USB cable to the other end. Then connect the micro-USB cable to a laptop to supply power for charging.
 ![Alt text](../images/drone/drone-9.png){ width="300" }
+
+## Student Project Examples
+
+- **Model Predictive Control for Trajectory Tracking on Crazyflie 2.1 Quadrotor** ([Poster](https://asig-x.github.io/comenius/posters/Sam_Nico_2026_Integration_Project.pdf))  
+N. C. Smith, S. P. Jones, MSc Integration Project, MSc Systems and Control, University of Groningen (RUG), 2026.
+

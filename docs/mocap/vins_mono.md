@@ -83,7 +83,7 @@ Clone the required repositories below into the `src` directory, then install and
 - [mocap4ros_qualisys](https://github.com/MOCAP4ROS2-Project/mocap4ros2_qualisys)  
 - [mocap4r2_msgs](https://github.com/MOCAP4ROS2-Project/mocap4r2_msgs)  
 
-After setup, add the [evaluation scripts](TBD) to the `vio` directory.  
+After setup, add the [`eval_trajectory.py`](../vio/eval_trajectory.py), [`trajectory_aligner.py`](../vio/trajectory_aligner.py) to the `vio` directory.  
 The final workspace structure should be:  
 ```text
 vio/ 
@@ -95,14 +95,14 @@ vio/
 │       └── vins_mono_ros2/ 
 ├── eval_trajectory.py 
 └── trajectory_aligner.py
-```
-2. Add the custom configuration file.  
-Place the customized configuration file at the following path:  
+```  
+Add the custom configuration file.  
+Place the customized configuration file [`config_asig.yaml`](../vio/config_asig.yaml) at the following path:  
 ```text
 vio/ros2_ws/src/vins_mono_ros2/config_pkg/config/config_asig.yaml
 ```  
 Make sure the filename and directory structure match exactly, as the system expects the configuration file at this location.  
-3. Build the ROS Packages.  
+2. Build the ROS Packages.  
 ```sh
 cd ros2_ws
 source /opt/ros/humble/setup.bash
