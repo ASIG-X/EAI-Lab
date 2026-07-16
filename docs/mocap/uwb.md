@@ -93,19 +93,18 @@ python3 ./convertROSbag2Txt.py <bag_path> [imu_topic] [uwb_topic] <out_path>
 # e.g., 
 python3 ./convertROSbag2Txt.py recorded_bag1 /cf2/imu_data /cf2/uwb_data recorded_data_txt
 ```
-9. Visualize recorded data [link](TBD)
-10. Run a linear least square example [link](TBD)
-11. Run an ESKF example [link](TBD)  
+9. Visualize recorded data (`visualizeData.m`)
+10. Run a linear least square example (`runLinearLS.m`)
+11. Run an ESKF example (`runESKF.m`)  
 **Note**: You could adjust the initial state, covariance, and measurement noise to see the change in performance. You could also implement the mahalanobis distance in the update step for outline rejection.  
 12. Definition of IMU and UWB topics:  
-TBD
-**Note**: The default settings in our code in the repository ‘ASIG-Fly’ has enabled the access of custom topic /cfx/imu_data and /cfx/uwb_data. 
-The topic `/cf2/imu_data` outputs 6-axis IMU data `["acc.x", "acc.y", "acc.z", "gyro.x", "gyro.y", "gyro.z"]`, with accelerometer readings of unit g (9.81m/s^2) and gyroscope readings of unit degree/s.  
+**Note**:  
+The topic `/cf2/imu_data` outputs 6-axis IMU data `["acc.x", "acc.y", "acc.z", "gyro.x", "gyro.y", "gyro.z"]`, with accelerometer readings of unit $g$ (9.81 $m/s^2$) and gyroscope readings of unit degree/s.  
 ![Alt text](../images/uwb/uwb-20.png){ width="300" }  
 The topic `/cf2/uwb_data` outputs the distance between the tag and the anchor in TWR mode.
 ![Alt text](../images/uwb/uwb-21.png){ width="300" }  
 The following instructions show how to modify them or add UWB measurements from more anchors.
-Go to the config file `crazyswarm2/crazyswarm2/crazyflie/config/crazyflies.yaml` [here](TBD), under `all/firmware_logging/custom_topics`, change the `vars` to what we desire and `frequency`.  
+Go to the config file `crazyswarm2/crazyflie/config/crazyflies.yaml` [here](https://github.com/IMRCLab/crazyswarm2/blob/main/crazyflie/config/crazyflies.yaml), under `all/firmware_logging/custom_topics`, change the `vars` to what we desire and `frequency`.  
 ![Alt text](../images/uwb/uwb-22.png){ width="400" }  
 13. Additional reference:  
 Log IMu data: https://github.com/IMRCLab/crazyswarm2/issues/601  

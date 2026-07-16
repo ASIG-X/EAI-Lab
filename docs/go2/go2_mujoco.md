@@ -128,13 +128,15 @@ The full rewards, reward scales and definitions are listed below:
 
 
 ## Installation
-Clone our [customized open-sourced repository](https://github.com/ASIG-X/leg-mujoco) and install *MuJoCo Playground* following [official guidance](https://github.com/google-deepmind/mujoco_playground/).  
+Install our customized [open-sourced repository](https://github.com/ASIG-X/leg-mujoco) and required dependencies.  
 Here we create a conda virtual environment for this task.  
 ```sh
 conda create -n env_mujocoplayground python=3.12 -y  
 conda activate env_mujocoplayground # make sure environment is always activated in following commands
-pip install playground
-cd mujoco_playground
+cd leg-mujoco
+pip install -e . # install Go2 customized MuJoCo Playground
+# install required dependencies
+pip install rsl-rl-lib wandb
 ```
 
 ## Train the policy
@@ -146,28 +148,28 @@ train-rsl-ppo --env_name=Go2JoystickFlatTerrain
 It is necessary to speficy `play-only`, `load_run_name`, and `checkpoint_num` (optional).  
 ```sh
 train-rsl-ppo \
---env_name=Go2JoystickFlatTerrain \
---play_only \
---load_run_name=<run_name> \  # choose specific run_name
---checkpoint_num=<number>  # optional, choose specific checkpoint, if not specified, the last checkpoint is automatically chosen
-```
+  --env_name=Go2JoystickFlatTerrain \
+  --play_only \
+  --load_run_name=<run_name> \
+  --checkpoint_num=<number>
+```  
+If `checkpoint_num` is not specified, the latest checkpoint is automatically chosen.
 
 ## Export policy in ONNX format
-This is for sim-to-sim validation and real-world deployment, we use [ONNX format](https://onnx.ai/onnx/intro/index.html) to deploy.  
+This is for Sim-to-Sim validation and real-world deployment, we use [ONNX format](https://onnx.ai/onnx/intro/index.html) to deploy.  
 ```sh
 train-rsl-ppo \
---env_name=Go2JoystickFlatTerrain \
---export_onnx_only \
---load_run_name=<run_name> \
---checkpoint_num=<number>
+  --env_name=Go2JoystickFlatTerrain \
+  --export_onnx_only \
+  --load_run_name=<run_name> \
+  --checkpoint_num=<number>
 ```
 
 ## Sim-to-Sim Validation
 Please refer to Isaaclab Training [*Sim-to-Sim Deployment with MuJoCo*](./go2_isaaclab.md#sim-to-sim-deployment-with-mujoco) section for details.
 
 ## Real-world Deployment
-The ROS 2/Unitree deployment code lives in [deploy](https://github.com/ASIG-X/leg-mujoco/deploy/) and runs exported
-ONNX policies for `Go2JoystickFlatTerrain`. Refer to [deploy/README.md](https://github.com/ASIG-X/leg-mujoco/deploy/README.md) for more details.  
+The ROS 2/Unitree deployment code lives in [deploy](https://github.com/ASIG-X/leg-mujoco/tree/main/deploy) and runs exported ONNX policies for `Go2JoystickFlatTerrain`. See [deploy/README.md](https://github.com/ASIG-X/leg-mujoco/blob/main/deploy/README.md) for setup, configuration, sim-to-sim, and real-robot notes.  
 ![](../images/go2/mujocopg-deploy.gif){width=500}
 
 1. Export Policy into ONNX format file and move to `deploy/model/`.
