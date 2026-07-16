@@ -1,8 +1,7 @@
 # VINS-Mono Demonstration
 
-This is instruction of using our handheld demonstrator for [VINS-Mono](https://ieeexplore.ieee.org/document/8421746), which is a classical monocular visual SLAM system. The [original repository](https://github.com/HKUST-Aerial-Robotics/VINS-Mono) targets ROS1, therefore we use a [modified version](https://github.com/dongbo19/VINS-MONO-ROS2)for ROS2 as the base of our code.
+This is instruction of using our handheld demonstrator for [VINS-Mono](https://ieeexplore.ieee.org/document/8421746), which is a classical monocular visual SLAM system. The [original repository](https://github.com/HKUST-Aerial-Robotics/VINS-Mono) targets ROS1, therefore we use a [modified ROS2 version](https://github.com/dongbo19/VINS-MONO-ROS2), [Qualisys ROS2 project](https://github.com/MOCAP4ROS2-Project/mocap4ros2_qualisys) and its [ROS messages](https://github.com/MOCAP4ROS2-Project/mocap4r2_msgs) as the base of our code.
 
-Refer to our [repository]() for VINS-Mono demonstrator
 
 ## Equipment Overview  
 The mobile experimental platform is used to record data, then the lab computer is used to run VINS-Mono and evaluate.  
@@ -71,11 +70,38 @@ ros2 topic echo /rigid_bodies
 ```
 If messages are printed to the terminal, the Qualisys driver is functioning correctly.
 
-### Working Directory Setup
+### Project Workspace Setup
 **On the computer:**  
-1. Clone our repository to local.  
-2. Check the config to match your own settings.  
-In `ros2_ws/src/vins_mono_ros2/config_pkg/config/config_asig.yaml`, check the parameters.  
+1. Create the workspace and install the required repositories.  
+Create the ROS 2 workspace:  
+```sh
+mkdir -p vio/ros2_ws/src && cd vio/ros2_ws/src
+```  
+Clone the required repositories below into the `src` directory, then install and configure their dependencies according to each repository’s official documentation.
+ 
+- [VINS-MONO-ROS2](https://github.com/dongbo19/VINS-MONO-ROS2)  
+- [mocap4ros_qualisys](https://github.com/MOCAP4ROS2-Project/mocap4ros2_qualisys)  
+- [mocap4r2_msgs](https://github.com/MOCAP4ROS2-Project/mocap4r2_msgs)  
+
+After setup, add the [evaluation scripts](TBD) to the `vio` directory.  
+The final workspace structure should be:  
+```text
+vio/ 
+├── ros2_ws/ 
+│ └── src/ 
+│   ├── mocap/ 
+│   ├── mocap4ros2_qualisys/ 
+│   ├── mocap_msgs/ 
+│   └── vins_mono_ros2/ 
+├── eval_trajectory.py 
+└── trajectory_aligner.py
+```
+2. Add the custom configuration file.  
+Place the customized configuration file at the following path:  
+```text
+vio/ros2_ws/src/vins_mono_ros2/config_pkg/config/config_asig.yaml
+```  
+Make sure the filename and directory structure match exactly, as the system expects the configuration file at this location.  
 3. Build the ROS Packages.  
 ```sh
 cd ros2_ws
