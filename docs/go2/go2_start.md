@@ -1,4 +1,4 @@
-# Get Started
+# Introduction
 
 Welcome to the Unitree Go2 Sim-to-Real guide. This documentation walks you through the complete workflow—from policy training in simulation to Sim-to-Sim validation and deployment on a real robot.  
 

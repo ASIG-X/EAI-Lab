@@ -8,7 +8,7 @@
 - How to fly a tiny quadrotor with limited resources? 
 - Towards Perceptive Locomotion for Quadrupedal Robots
 
-#### Multimodal Mobile Sensing ([WMCS041-05](https://ocasys.rug.nl/2025-2026/catalog/course/WMCS041-05))
+#### Multimodal Mobile Sensing ([WMCS041-05](https://ocasys.rug.nl/2025-2026/catalog/course/WMCS041-05)), Practical Assignments
 
  - [Visual inertial odometry](./mocap/vins_mono.md)
  - [Ultra-wideband-inertial motion tracking](./mocap/uwb.md)
