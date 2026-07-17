@@ -1,0 +1,1603 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Embodied AI Lab for Education">
+      
+      
+        <meta name="author" content="Ella Yixuan Qiu & Qihao Yuan & Ziyu Cao">
+      
+      
+        <link rel="canonical" href="https://asig-x.github.io/EAI-Lab/go2/go2_mujoco/">
+      
+      
+        <link rel="prev" href="../go2_start/">
+      
+      
+        <link rel="next" href="../go2_isaaclab/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.48">
+    
+    
+      
+        <title>MuJoCo Playground - Embodied AI Lab for Education</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.62c9b9cc.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mujoco-playground" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Embodied AI Lab for Education" class="md-header__button md-logo" aria-label="Embodied AI Lab for Education" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Embodied AI Lab for Education
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MuJoCo Playground
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Embodied AI Lab for Education" class="md-nav__button md-logo" aria-label="Embodied AI Lab for Education" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Embodied AI Lab for Education
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Get started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/camera_tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Qualisys Camera Tracking
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/drone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Crazyflie 2.1+
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/uwb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  UWB Network Localization
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/vins_mono/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Visual-Inertial Odometry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/resple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  LiDAR-inertial Odometry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/gloves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  MANUS Gloves
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Unitree Go2 Sim-to-Real
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Unitree Go2 Sim-to-Real
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Introduction
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  MuJoCo Playground
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  MuJoCo Playground
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#policy-and-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Policy and environment setup
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Policy and environment setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observation-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Observation Space
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Action Space
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rewards
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-randomization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Domain Randomization
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Environment Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppo-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        PPO Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-the-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Train the policy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#play-the-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Play the policy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-policy-in-onnx-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Export policy in ONNX format
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sim-to-sim-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sim-to-Sim Validation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Real-world Deployment
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_isaaclab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  IsaacLab
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Real-world Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teaching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Teaching Activities
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acknowledgements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Acknowledgements
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#policy-and-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Policy and environment setup
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Policy and environment setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observation-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Observation Space
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Action Space
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rewards
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-randomization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Domain Randomization
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Environment Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppo-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        PPO Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-the-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Train the policy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#play-the-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Play the policy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-policy-in-onnx-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Export policy in ONNX format
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sim-to-sim-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sim-to-Sim Validation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Real-world Deployment
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../go2_start/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Unitree Go2 Sim-to-Real
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="mujoco-playground">MuJoCo Playground<a class="headerlink" href="#mujoco-playground" title="Permanent link">&para;</a></h1>
+<p>This instruction explains how to train a <a href="https://www.unitree.com/go2">Unitree Go2 quadruped</a> to track commanded velocities using <a href="https://en.wikipedia.org/wiki/Reinforcement_learning"><em>Reinforcement Learning (RL)</em></a> in <a href="https://github.com/google-deepmind/mujoco_playground/">MuJoCo Playground</a>. To follow the steps, refer to our customized <a href="https://github.com/ASIG-X/leg-mujoco">open-source repository</a>.</p>
+<p><strong>Task</strong>: Track body-frame planar velocity commands: <span class="arithmatex">\(\mathbf{c} = [v_x^c, v_y^c, \omega_z^c]\)</span><br />
+where <span class="arithmatex">\(v_x\)</span> and <span class="arithmatex">\(v_y\)</span> are the commanded linear velocities in the robot’s body frame, and <span class="arithmatex">\(\omega_z\)</span> is the commanded yaw rate.<br />
+<strong>RL algorithm:</strong> <a href="https://arxiv.org/pdf/1707.06347">Proximal Policy Optimization (PPO)</a>  </p>
+<p>This instruction uses the <code>Go2JoystickFlatTerrain</code> environment and the <a href="../(https://github.com/leggedrobotics/rsl_rl)"><em>RSL-RL</em></a> implementation of PPO through the <code>learning/train_rsl_rl.py</code> training script.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All parameter values and configuration details presented in this document are set for the current environment and training setup. They should not be interpreted as generic defaults for Unitree Go2 locomotion tasks.  </p>
+</div>
+<h2 id="policy-and-environment-setup">Policy and environment setup<a class="headerlink" href="#policy-and-environment-setup" title="Permanent link">&para;</a></h2>
+<h3 id="observation-space">Observation Space<a class="headerlink" href="#observation-space" title="Permanent link">&para;</a></h3>
+<p><strong>Actor Observation</strong>:<br />
+The actor receives proprioception information, each frame contains 45-dimensional observation:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Term</th>
+<th style="text-align: center;">Dimension</th>
+<th style="text-align: center;">Noise amplitude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Local angular velocity</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>+/-0.2</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Projected gravity</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>+/-0.05</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Velocity commands</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">None</td>
+</tr>
+<tr>
+<td style="text-align: center;">Joint position bias</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><code>+/-0.01</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Joint velocity</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><code>+/-0.01</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Previous actions</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">None</td>
+</tr>
+</tbody>
+</table>
+<p>Noise is uniform and independently sampled for each new frame.<br />
+<strong>Actor input</strong>: Observation history of concatenating 10 frames (<strong>450-dimensional</strong>). It supplies short-term temporal context to the feed-forward actor.</p>
+<p><strong>Critic Observation</strong>:<br />
+The critic receives the uncorrupted current actor frame and privileged information:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Term</th>
+<th style="text-align: center;">Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Current actor observation</td>
+<td style="text-align: center;">45</td>
+</tr>
+<tr>
+<td style="text-align: center;">Local linear velocity</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">Base height above ground</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critic input</strong>: <strong>49-dimensional</strong> and contains no history.  </p>
+<h3 id="action-space">Action Space<a class="headerlink" href="#action-space" title="Permanent link">&para;</a></h3>
+<p>The policy action is a normalized 12-dimensional vector, one value per
+actuated Go2 joint in MuJoCo model order: <span class="arithmatex">\(\mathbf{a}_t \in [-1, 1]^{12}\)</span>.<br />
+After rollout perturbation noise and clipping, the environment computes:</p>
+<div class="arithmatex">\[
+\mathbf{q}_{target} = \mathbf{q}_{default} + 0.5\mathbf{a}_t
+\]</div>
+<p>where 0.5 is action scale.<br />
+<strong>Note</strong>: The action is not a torque command. It is converted to a joint-position target,
+and the MuJoCo position actuators apply the configured PD gains.
+See the
+<a href="https://mujoco.readthedocs.io/en/stable/computation/index.html#actuation-model">MuJoCo actuator documentation</a>
+for the underlying actuation model.</p>
+<h3 id="rewards">Rewards<a class="headerlink" href="#rewards" title="Permanent link">&para;</a></h3>
+<p>At each control step, the environment computes</p>
+<div class="arithmatex">\[
+r_t = \Delta t \sum_i s_i r_i, \qquad \Delta t = 0.02.
+\]</div>
+<p>where <span class="arithmatex">\(r_i\)</span> and <span class="arithmatex">\(s_i\)</span> represent each reward term and its scale, <span class="arithmatex">\(\Delta t\)</span> is the control step.<br />
+The full rewards, reward scales and definitions are listed below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Term</th>
+<th style="text-align: center;">Scale</th>
+<th style="text-align: center;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>tracking_lin_vel</code></td>
+<td style="text-align: center;"><code>+1.0</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\exp\left(-\lVert \mathbf{v}_{xy}^{c}-\mathbf{v}_{xy}^{b}\rVert_2^2/0.25\right)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>tracking_ang_vel</code></td>
+<td style="text-align: center;"><code>+1.0</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\exp\left(-\left(\omega_z^{c}-\omega_z^{b}\right)^2/0.25\right)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>height</code></td>
+<td style="text-align: center;"><code>+1.0</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\exp\left(-10 \cdot \left(z_b-0.35\right)^2\right)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>lin_vel_z</code></td>
+<td style="text-align: center;"><code>-1.5</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\left(v_z^b\right)^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>action_rate</code></td>
+<td style="text-align: center;"><code>-0.05</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\lVert \mathbf{a}_t-\mathbf{a}_{t-1}\rVert_2^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>action</code></td>
+<td style="text-align: center;"><code>-0.1</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\lVert \mathbf{a}_t\rVert_2^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ang_vel_xy</code></td>
+<td style="text-align: center;"><code>-0.05</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\lVert \boldsymbol{\omega}_{xy}^{b}\rVert_2^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>orientation</code></td>
+<td style="text-align: center;"><code>-5.0</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\lVert \mathbf{g}_{xy}^{b}\rVert_2^2\)</span>, <span class="arithmatex">\(\mathbf{g}^{b}\)</span> is body-frame projected gravity</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>pose</code></td>
+<td style="text-align: center;"><code>+1.2</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\exp\left(-\sum_{j=1}^{12}w_j\left(q_j-q_j^{\mathrm{default}}\right)^2\right), \mathbf{w}=[1,1,0.1]^{\times 4}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>stand_still</code></td>
+<td style="text-align: center;"><code>-1.0</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{1}_{\lVert\mathbf{c}\rVert_2&lt;0.01}\sum_{j=1}^{12}\left\|q_j-q_j^{\mathrm{default}}\right\|\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>energy</code></td>
+<td style="text-align: center;"><code>-0.001</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\sum_{j=1}^{12}\left \| \dot{q}_j\right\| \cdot \left\|\tau_j\right\|\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="domain-randomization">Domain Randomization<a class="headerlink" href="#domain-randomization" title="Permanent link">&para;</a></h3>
+<p><a href="https://arxiv.org/pdf/1703.06907">Domain randomization</a> is used to reduce overfitting, improve robustness, and prepare the controller for deployment conditions. </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Quantity</th>
+<th style="text-align: center;">Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Geometry friction scale</td>
+<td style="text-align: center;"><code>U(0.5, 2.0)</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Body mass and inertia scale</td>
+<td style="text-align: center;"><code>U(0.85, 1.15)</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Proportional gain <code>Kp</code></td>
+<td style="text-align: center;"><code>U(25.0, 45.0)</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Derivative gain <code>Kd</code></td>
+<td style="text-align: center;"><code>U(0.3, 1.6)</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">COM offset</td>
+<td style="text-align: center;">x/y <code>+/-0.05 m</code>, z <code>+/-0.04 m</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">External Push</td>
+<td style="text-align: center;"><code>U(-1.0, 1.0)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="environment-configuration">Environment Configuration<a class="headerlink" href="#environment-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: center;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Physics step, <code>sim_dt</code></td>
+<td style="text-align: center;"><code>0.004 s</code> (250 Hz)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Control step, <code>ctrl_dt</code></td>
+<td style="text-align: center;"><code>0.02 s</code> (50 Hz)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Physics substeps per action</td>
+<td style="text-align: center;"><code>5</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Nominal episode length</td>
+<td style="text-align: center;"><code>5,000</code> control steps (100 s)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Sampled time limit</td>
+<td style="text-align: center;"><code>3,750 - 6,250</code> steps (75 - 125 s)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Nominal PD gains</td>
+<td style="text-align: center;"><code>Kp = 35.0</code>, <code>Kd = 0.5</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Soft joint-limit factor</td>
+<td style="text-align: center;"><code>0.95</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ppo-configuration">PPO Configuration<a class="headerlink" href="#ppo-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: center;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Parallel environments</td>
+<td style="text-align: center;"><code>2,048</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Steps per environment and iteration</td>
+<td style="text-align: center;"><code>24</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Samples per iteration</td>
+<td style="text-align: center;"><code>49,152</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Actor hidden dimensions</td>
+<td style="text-align: center;"><code>[512, 256, 128]</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Critic hidden dimensions</td>
+<td style="text-align: center;"><code>[512, 256, 128]</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Initial Gaussian action standard deviation</td>
+<td style="text-align: center;"><code>0.5</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">PPO clip parameter</td>
+<td style="text-align: center;"><code>0.2</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Discount factor <code>gamma</code></td>
+<td style="text-align: center;"><code>0.99</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">GAE parameter <code>lambda</code></td>
+<td style="text-align: center;"><code>0.95</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Learning rate</td>
+<td style="text-align: center;"><code>1e-3</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Learning-rate schedule</td>
+<td style="text-align: center;">adaptive; target KL <code>0.01</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Learning epochs per iteration</td>
+<td style="text-align: center;"><code>10</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Mini-batches per epoch</td>
+<td style="text-align: center;"><code>4</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Samples per mini-batch</td>
+<td style="text-align: center;"><code>12,288</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Value-loss coefficient</td>
+<td style="text-align: center;"><code>1.0</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Entropy coefficient</td>
+<td style="text-align: center;"><code>0.01</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Maximum gradient norm</td>
+<td style="text-align: center;"><code>1.0</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>Install our customized <a href="https://github.com/ASIG-X/leg-mujoco">open-sourced repository</a> and required dependencies.<br />
+Here we create a conda virtual environment for this task.<br />
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>env_mujocoplayground<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>-y<span class="w">  </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>env_mujocoplayground<span class="w"> </span><span class="c1"># make sure environment is always activated in following commands</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>leg-mujoco
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span><span class="c1"># install Go2 customized MuJoCo Playground</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># install required dependencies</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>pip<span class="w"> </span>install<span class="w"> </span>rsl-rl-lib<span class="w"> </span>wandb
+</span></code></pre></div></p>
+<h2 id="train-the-policy">Train the policy<a class="headerlink" href="#train-the-policy" title="Permanent link">&para;</a></h2>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>train-rsl-ppo<span class="w"> </span>--env_name<span class="o">=</span>Go2JoystickFlatTerrain
+</span></code></pre></div>
+<h2 id="play-the-policy">Play the policy<a class="headerlink" href="#play-the-policy" title="Permanent link">&para;</a></h2>
+<p>It is necessary to speficy <code>play-only</code>, <code>load_run_name</code>, and <code>checkpoint_num</code> (optional).<br />
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>train-rsl-ppo<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--env_name<span class="o">=</span>Go2JoystickFlatTerrain<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--play_only<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--load_run_name<span class="o">=</span>&lt;run_name&gt;<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--checkpoint_num<span class="o">=</span>&lt;number&gt;
+</span></code></pre></div>
+If <code>checkpoint_num</code> is not specified, the latest checkpoint is automatically chosen.</p>
+<h2 id="export-policy-in-onnx-format">Export policy in ONNX format<a class="headerlink" href="#export-policy-in-onnx-format" title="Permanent link">&para;</a></h2>
+<p>This is for Sim-to-Sim validation and real-world deployment, we use <a href="https://onnx.ai/onnx/intro/index.html">ONNX format</a> to deploy.<br />
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>train-rsl-ppo<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--env_name<span class="o">=</span>Go2JoystickFlatTerrain<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--export_onnx_only<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--load_run_name<span class="o">=</span>&lt;run_name&gt;<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--checkpoint_num<span class="o">=</span>&lt;number&gt;
+</span></code></pre></div></p>
+<h2 id="sim-to-sim-validation">Sim-to-Sim Validation<a class="headerlink" href="#sim-to-sim-validation" title="Permanent link">&para;</a></h2>
+<p>Please refer to Isaaclab Training <a href=".././go2_isaaclab/#sim-to-sim-deployment-with-mujoco"><em>Sim-to-Sim Deployment with MuJoCo</em></a> section for details.</p>
+<h2 id="real-world-deployment">Real-world Deployment<a class="headerlink" href="#real-world-deployment" title="Permanent link">&para;</a></h2>
+<p>The ROS 2/Unitree deployment code lives in <a href="https://github.com/ASIG-X/leg-mujoco/tree/main/deploy">deploy</a> and runs exported ONNX policies for <code>Go2JoystickFlatTerrain</code>. See <a href="https://github.com/ASIG-X/leg-mujoco/blob/main/deploy/README.md">deploy/README.md</a> for setup, configuration, sim-to-sim, and real-robot notes.<br />
+<img alt="" src="../../images/go2/mujocopg-deploy.gif" width="500" /></p>
+<ol>
+<li>Export Policy into ONNX format file and move to <code>deploy/model/</code>.</li>
+<li>Check and revise <code>config.yaml</code>.<br />
+In real robot deployment, some parameters (e.g. <code>Kp</code> and <code>Kd</code>) need to be adjusted based on different robot.<br />
+Set the correct exported policy path: 
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">policy</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;model/policy_deploy.onnx&quot;</span><span class="w">  </span><span class="c1"># match your own file name</span>
+</span></code></pre></div>
+For the real robot, enable <code>unitree_services</code>:
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">unitree_services</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<strong>Note</strong>: This makes the node call Unitree <code>SportClient::StandDown()</code> and <code>MotionSwitcherClient::ReleaseMode()</code> before low-level control. For MuJoCo sim-to-sim validation, set <code>unitree_services</code> to be <code>false</code>.<br />
+The ROS2 node expects:<br />
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>input:  obs      [1, 450]
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>output: actions  [1, 12]
+</span></code></pre></div>
+During policy control, the ROS2 node publishes two 12-joint messages in Unitree SDK motor order (<code>FR</code>, <code>FL</code>, <code>RR</code>, <code>RL</code>, with <code>hip</code>/<code>thigh</code>/<code>calf</code> for each leg):<br />
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>- /network_output_raw: unscaled policy actions after finite-value handling and the configured `action_clip`.
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>- /target_action: final joint-angle commands, computed as `default_angles + network_output_raw * action_scale`.
+</span></code></pre></div></li>
+<li>Build the workspace.<br />
+Source the ROS 2 and Unitree SDK environment first, then:<br />
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>deploy
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>./run_build.sh
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">source</span><span class="w"> </span>install/share/go2_joystick_deploy/local_setup.bash
+</span></code></pre></div>
+<strong>Note</strong>: Source <code>install/share/go2_joystick_deploy/local_setup.bash</code> in every terminal
+that uses ROS CLI tools with the custom <code>JointAngularPositions</code> message.  </li>
+<li>Run With Unitree MuJoCo
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>deploy
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>./locomotion_node<span class="w"> </span>--net<span class="w"> </span>lo<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</span></code></pre></div>
+In another terminal, run the existing command publisher:<br />
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python<span class="w"> </span>../deploy/terminal_cmd.py<span class="w">  </span><span class="c1"># or wireless_cmd.py to use joystick controller</span>
+</span></code></pre></div></li>
+<li><strong>Real Robot Notes</strong><br />
+Hardware setup details depend on the onboard computer, network interface, Unitree
+SDK installation, and robot safety procedure; for a fuller hardware reference,
+see <a href="https://github.com/ASIG-X/REASAN">REASAN</a>.<br />
+On shutdown or <code>Ctrl</code>+<code>C</code>, the node interpolates to <code>sit_angles</code> and then sends a
+damping command.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../go2_start/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../go2_isaaclab/" class="md-footer__link md-footer__link--next" aria-label="Next: IsaacLab">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                IsaacLab
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 ASIG Lab
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3809e150.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

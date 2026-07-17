@@ -1,0 +1,1411 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Embodied AI Lab for Education">
+      
+      
+        <meta name="author" content="Ella Yixuan Qiu & Qihao Yuan & Ziyu Cao">
+      
+      
+        <link rel="canonical" href="https://asig-x.github.io/EAI-Lab/go2/go2_isaaclab/">
+      
+      
+        <link rel="prev" href="../go2_mujoco/">
+      
+      
+        <link rel="next" href="../go2_deployment/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.48">
+    
+    
+      
+        <title>IsaacLab - Embodied AI Lab for Education</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.62c9b9cc.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#isaaclab" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Embodied AI Lab for Education" class="md-header__button md-logo" aria-label="Embodied AI Lab for Education" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Embodied AI Lab for Education
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IsaacLab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Embodied AI Lab for Education" class="md-nav__button md-logo" aria-label="Embodied AI Lab for Education" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Embodied AI Lab for Education
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Get started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/camera_tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Qualisys Camera Tracking
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/drone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Crazyflie 2.1+
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/uwb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  UWB Network Localization
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/vins_mono/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Visual-Inertial Odometry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/resple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  LiDAR-inertial Odometry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mocap/gloves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  MANUS Gloves
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Unitree Go2 Sim-to-Real
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Unitree Go2 Sim-to-Real
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Introduction
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_mujoco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  MuJoCo Playground
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  IsaacLab
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  IsaacLab
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-and-playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Training and Playing
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-onnx-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Export ONNX Model
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sim-to-sim-deployment-with-mujoco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sim-to-Sim Deployment with MuJoCo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sim-to-Sim Deployment with MuJoCo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-deployment-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Build deployment code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-in-mujoco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploy in MuJoCo.
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-on-real-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deployment on Real Robot
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment on Real Robot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flash-jetson-orin-agx" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Flash Jetson Orin AGX
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install Dependencies
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-deployment-code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Build Deployment Code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-and-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploy and Control
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disclaimer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DISCLAIMER
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../go2_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Real-world Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teaching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Teaching Activities
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acknowledgements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Acknowledgements
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-and-playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Training and Playing
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-onnx-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Export ONNX Model
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sim-to-sim-deployment-with-mujoco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sim-to-Sim Deployment with MuJoCo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sim-to-Sim Deployment with MuJoCo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-deployment-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Build deployment code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-in-mujoco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploy in MuJoCo.
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-on-real-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deployment on Real Robot
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment on Real Robot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flash-jetson-orin-agx" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Flash Jetson Orin AGX
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install Dependencies
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-deployment-code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Build Deployment Code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-and-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploy and Control
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disclaimer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DISCLAIMER
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../go2_start/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Unitree Go2 Sim-to-Real
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="isaaclab">IsaacLab<a class="headerlink" href="#isaaclab" title="Permanent link">&para;</a></h1>
+<p>Code is available <a href="https://github.com/ASIG-X/asig_sim2real">here</a>.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>First create a new conda environment:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>env_go2<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>env_go2
+</span></code></pre></div></p>
+<p>Install PyTorch:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.7.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.22.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu128
+</span></code></pre></div></p>
+<p>Install IsaacSim 4.5.0:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;isaacsim[all,extscache]==4.5.0&#39;</span><span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.nvidia.com
+</span></code></pre></div></p>
+<p>Install IsaacLab and others inside the cloned folder:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./isaaclab.sh<span class="w"> </span>--install
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>./rsl_rl
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>./asig_sim2real
+</span></code></pre></div></p>
+<h2 id="training-and-playing">Training and Playing<a class="headerlink" href="#training-and-playing" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--run_name<span class="w"> </span>policy_1
+</span></code></pre></div>
+<p>Training output would be something like this:
+<img alt="lab_train_output" src="../../images/go2/isaaclab_training_output.png" width="500" /></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>scripts/play.py<span class="w"> </span>--load_run<span class="w"> </span>policy_1
+</span></code></pre></div>
+<p>For the first time, it may take some time to build the shaders. 
+<img alt="lab_play" src="../../images/go2/isaaclab_play.png" width="500" /></p>
+<h2 id="export-onnx-model">Export ONNX Model<a class="headerlink" href="#export-onnx-model" title="Permanent link">&para;</a></h2>
+<p>After being played, the ONNX model of the policy will be exported, which is needed for deployment.</p>
+<p>Inside logs/rsl_rl/asig_sim2real/policy_1/exported you can find the policy.onnx exported just now.
+Copy this file to the deployment folder:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cp<span class="w"> </span>./logs/rsl_rl/asig_sim2real/policy_1/exported/policy.onnx<span class="w"> </span>./deployment/model
+</span></code></pre></div>
+<h2 id="sim-to-sim-deployment-with-mujoco">Sim-to-Sim Deployment with MuJoCo<a class="headerlink" href="#sim-to-sim-deployment-with-mujoco" title="Permanent link">&para;</a></h2>
+<h3 id="build-deployment-code">Build deployment code<a class="headerlink" href="#build-deployment-code" title="Permanent link">&para;</a></h3>
+<p>Now we have the ONNX model, we can build the deployment code.</p>
+<p>First install dependencies:</p>
+<ul>
+<li>
+<p>Install ROS2 Humble following <a href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html">this guide</a></p>
+</li>
+<li>
+<p>Install <a href="https://github.com/unitreerobotics/unitree_sdk2">unitree_sdk2</a></p>
+</li>
+<li>
+<p>Install other dependencies
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo apt install libeigen3-dev libfmt-dev
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Install onnxruntime</p>
+<ul>
+<li>
+<p>Go to the <a href="https://github.com/microsoft/onnxruntime/releases">release page</a> and download prebuilt binaries. 
+Please download this file (tested): onnxruntime-linux-x64-gpu-1.22.0.tgz</p>
+</li>
+<li>
+<p>Extract the folder and copy the “include” folder to “/usr/local”.</p>
+</li>
+<li>
+<p>Copy the “lib” folder as “/usr/local/lib64”.</p>
+</li>
+<li>
+<p>Copy the “lib/cmake” folder to “/usr/local/lib”.</p>
+</li>
+<li>
+<p>Add “/usr/local/lib64” to your “LD_LIBRARY_PATH”:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH
+</span></code></pre></div></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Download TensorRT 10.9 GA from here and extract to a separate folder. 
+You should download this one:
+<strong>TensorRT 10.9 GA for Linux x86_64 and CUDA 12.0 to 12.8 TAR Package</strong>.
+Then Add “lib” folder of extracted TensorRT to your “LD_LIBRARY_PATH”:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>export LD_LIBRARY_PATH=/absolute/path/to/tensorrt/lib:$LD_LIBRARY_PATH
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Install cuda-12.8 and cudnn-9 and add to LD_LIBRARY_PATH<br />
+Install cuda-12.8 follow <a href="https://developer.nvidia.com/cuda-12-8-0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">this</a>.<br />
+Install cudnn-9 follow <a href="https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">this</a>.<br />
+Then:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/cuda-12.8/bin<span class="si">${</span><span class="nv">PATH</span><span class="p">:+:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/cuda-12.8/lib64<span class="si">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="p">:+:</span><span class="si">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="si">}}</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<p>Now the dependencies should be fine, go back to the asig_sim2real folder and build the deployment code:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>deployment
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./run_build.sh
+</span></code></pre></div></p>
+<h3 id="deploy-in-mujoco">Deploy in MuJoCo.<a class="headerlink" href="#deploy-in-mujoco" title="Permanent link">&para;</a></h3>
+<p>Follow <a href="https://github.com/unitreerobotics/unitree_mujoco">this link</a> to install unitree_mujoco to a separate folder. 
+If you install c++ version, follow official guidance to install mujoco.</p>
+<p>Make sure you install MuJoCo 3.2.7 using:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">mujoco</span><span class="o">==</span><span class="m">3</span>.2.7
+</span></code></pre></div></p>
+<p>Notes:
+You need to clone unitree_mujoco to local
+After installation following official guidance, open unitree_mujoco/simulate_python/config.py, set USE_JOYSTICK = 0.
+In MuJoCo it should look like this:
+<img alt="mujoco_go2" src="../../images/go2/mujoco_go2.png" /></p>
+<p>After installation, launch the unitree_mujoco simulator (both Python and C++ version work) in unitree_mujoco folder
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># this is for c++ version</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">cd</span><span class="w"> </span>unitree_mujoco/simulate/build
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>./unitree_mujoco<span class="w"> </span><span class="c1"># assuming you have build output here</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># this is for python version</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nb">cd</span><span class="w"> </span>unitree_mujoco/simulate_python
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>python3<span class="w"> </span>./unitree_mujoco.py
+</span></code></pre></div></p>
+<p>Finally, start the control nodes in asig_sim2real/deployment folder
+(If you encounter errors, try to deactivate the conda environment):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># terminal 1: deploy onnx model</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>./locomotion_node<span class="w"> </span>--net<span class="w"> </span>lo<span class="w"> </span>--policy<span class="w"> </span>loco_policy<span class="w"> </span><span class="c1"># or loco_policy (the pretrained policy)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># terminal 2: keyboard control</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>python<span class="w"> </span>terminal_control.py
+</span></code></pre></div></p>
+<h2 id="deployment-on-real-robot">Deployment on Real Robot<a class="headerlink" href="#deployment-on-real-robot" title="Permanent link">&para;</a></h2>
+<h3 id="flash-jetson-orin-agx">Flash Jetson Orin AGX<a class="headerlink" href="#flash-jetson-orin-agx" title="Permanent link">&para;</a></h3>
+<p>First we need to flash Nvidia Jetson Orin AGX and install SDK packages like cuda, cudnn, tensorrt and so on.
+Check the <a href="../go2_deployment/">deployment docuement</a> for details on flashing the system and installing components.</p>
+<h3 id="install-dependencies">Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permanent link">&para;</a></h3>
+<p>Log into Jetson AGX Orin ubuntu system and check whether required packages are installed correctly:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nvcc<span class="w"> </span>–version
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>ls<span class="w"> </span>-l<span class="w"> </span>/usr/local/cuda
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>ls<span class="w"> </span>/usr/lib/aarch64-linux-gnu/libcudnn*
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>ls<span class="w"> </span>/usr/lib/aarch64-linux-gnu/libnvinfer*
+</span></code></pre></div>
+If not, you can try to follow the components installation guide again.</p>
+<p>Install <a href="https://docs.ros.org/en/humble/index.html">ROS2 humble</a>.</p>
+<p>Install <a href="https://github.com/unitreerobotics/unitree_sdk2">unitree sdk2</a>.</p>
+<p>Install <a href="https://github.com/unitreerobotics/unitree_sdk2_python">unitree sdk2 python</a> follow their official guide.
+When following the last code block of FAQ-1, change the commands to:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">#use the following commands instead of those given in repository</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span>~/unitree_sdk2_python
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CYCLONEDDS_HOME</span><span class="o">=</span>/home/usrname/cyclonedds/install
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># if this doesn&#39;t work, try this one</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CYCLONEDDS_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/cyclonedds/install
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>--no-build-isolation
+</span></code></pre></div></p>
+<p>Install required packages for the deployment code:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libeigen3-dev<span class="w"> </span>libfmt-dev
+</span></code></pre></div></p>
+<p>Install onnxruntime, compile procedures are based on <a href="https://onnxruntime.ai/docs/build/eps.html#nvidia-jetson-tx1tx2nanoxavierorin">official manuscript</a>.</p>
+<ul>
+<li>Onnxruntime v1.23.2:  <strong>install from source</strong>
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/microsoft/onnxruntime
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>build-essential<span class="w"> </span>software-properties-common<span class="w"> </span>libopenblas-dev<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>libpython3.10-dev<span class="w"> </span>python3-pip<span class="w"> </span>python3-dev<span class="w"> </span>python3-setuptools<span class="w"> </span>python3-wheel
+</span></code></pre></div></li>
+<li>Install cmake 3.28.5, find files in <a href="https://cmake.org/files/v3.28/">https://cmake.org/files/v3.28/</a>.
+   Choose <a href="https://cmake.org/files/v3.28/cmake-3.28.5-linux-aarch64.sh"><code>cmake-3.28.5-linux-aarch64.sh</code></a>.
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./cmake-3.28.5-linux-aarch64.sh
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>./cmake-3.28.5-linux-aarch64.sh<span class="w"> </span>--prefix<span class="o">=</span>/usr/local
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># check cmake version; should be 3.28 now</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>cmake<span class="w"> </span>--version
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># if you encounter errors or version not update, reboot may simply solve problem</span>
+</span></code></pre></div></li>
+<li>Go to cloned <a href="https://github.com/microsoft/onnxruntime"><code>onnxruntime</code></a> project.
+   Make sure you set <strong>onnxruntime_BUILD_UNIT_TESTS=OFF</strong> , more details in <a href="https://github.com/microsoft/onnxruntime/issues/26425">github</a>.
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>./build.sh<span class="w"> </span>--config<span class="w"> </span>Release<span class="w"> </span>--update<span class="w"> </span>--build<span class="w"> </span>--parallel<span class="w"> </span>--use_tensorrt<span class="w"> </span>--cuda_home<span class="w"> </span>/usr/local/cuda<span class="w"> </span>--cudnn_home<span class="w"> </span>/usr/lib/aarch64-linux-gnu<span class="w"> </span>--tensorrt_home<span class="w"> </span>/usr/lib/aarch64-linux-gnu<span class="w"> </span>--skip_tests<span class="w"> </span>--cmake_extra_defines<span class="w"> </span><span class="s1">&#39;CMAKE_CUDA_ARCHITECTURES=native&#39;&#39;onnxruntime_BUILD_UNIT_TESTS=OFF&#39;</span><span class="w"> </span>--build_shared_lib
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nb">cd</span><span class="w"> </span>build/Linux/Release
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>sudo<span class="w"> </span>make<span class="w"> </span>install
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="nb">cd</span><span class="w"> </span>/usr/local/lib/cmake/onnxruntime
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>sudo<span class="w"> </span>vim<span class="w"> </span>./onnxruntimeTargets-release.cmake
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c1"># change all &quot;lib64&quot; to &quot;lib&quot; and save</span>
+</span></code></pre></div></li>
+</ul>
+<h3 id="build-deployment-code_1">Build Deployment Code<a class="headerlink" href="#build-deployment-code_1" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># before run this, make sure you source livox_driver, mocap and unitree driver first</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nb">cd</span><span class="w"> </span>~/asig_sim2real/deployment
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>./run_build.sh
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="c1"># if you encounter onnxruntime error again, run this:</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/usr/local/include/onnxruntime<span class="w"> </span>/usr/local/include/
+</span></code></pre></div>
+<h3 id="deploy-and-control">Deploy and Control<a class="headerlink" href="#deploy-and-control" title="Permanent link">&para;</a></h3>
+<p>Make sure your Jetson is in the same subnet as your PC.
+For example, Jetson IP can be 192.168.20.1, and the IP of your PC can be 192.168.20.2.
+On both computers, set the network IPv4 to be manual, and the network mask should be 255.255.255.0.
+After this, you should be able to communicate with ROS2 on both computers.
+Then, similarly to the Sim-to-Sim deployment, run the control script on your PC, and run the deployment code on Jetson:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># on your pc</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>python<span class="w"> </span>terminal_control.py
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># on jetson</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NET_INTERFACE</span><span class="o">=</span>network<span class="w"> </span><span class="c1"># network interface name on jetson connecting to the robot (e.g., eno1)</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>./locomotion_node<span class="w"> </span>--net<span class="w"> </span>&lt;network<span class="w"> </span>interface&gt;<span class="w"> </span>--policy<span class="w"> </span>loco_policy<span class="w"> </span><span class="c1"># or loco_policy</span>
+</span></code></pre></div></p>
+<h2 id="disclaimer">DISCLAIMER<a class="headerlink" href="#disclaimer" title="Permanent link">&para;</a></h2>
+<p><strong><em>WARNING — REAL ROBOT DEPLOYMENT</em></strong></p>
+<p>Always validate your controller in MuJoCo simulation before deploying
+to hardware. This document is provided as-is, for reference only, with
+no guarantee of correctness or safety.</p>
+<p>Real robots can move suddenly and with significant force. Hardware and
+software setups vary, and behavior that works in simulation may fail
+on hardware. Before running anything:</p>
+<ul>
+<li>Keep an emergency stop within reach at all times</li>
+<li>Clear the workspace of people and obstacles</li>
+<li>Start with reduced torque/velocity limits</li>
+<li>Never assume the robot will behave as expected</li>
+</ul>
+<p>You are solely responsible for ensuring the safety of people and
+equipment when using this document and the accompanying code.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../go2_mujoco/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MuJoCo Playground">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                MuJoCo Playground
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../go2_deployment/" class="md-footer__link md-footer__link--next" aria-label="Next: Real-world Setup">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Real-world Setup
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 ASIG Lab
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3809e150.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
