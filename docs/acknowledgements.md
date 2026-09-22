@@ -2,7 +2,7 @@
 
 We gratefully acknowledge the contributors whose expertise, time, and support made this project possible.
 
-- [**Dr. Kailai Li**](https://kailaili.github.io/) - Assistant Professor @ Linköping University
+- [**Dr. Kailai Li**](https://kailaili.github.io/) - Assistant Professor @ University of Groningen
 - [**Prof. Ming Cao**](https://www.rug.nl/staff/m.cao/?lang=en) - Professor @ University of Groningen
 - [**Ziyu Cao**](https://asig-x.github.io/ziyu-cao/) - PhD Student @ Linköping University
 - [**Qihao Yuan**](https://asig-x.github.io/qihao-yuan/) - PhD Student @ University of Groningen
