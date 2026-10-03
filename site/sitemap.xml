@@ -4,10 +4,34 @@
         <loc>https://asig-x.github.io/EAI-Lab/</loc>
       </url>
       <url>
+        <loc>https://asig-x.github.io/EAI-Lab/acknowledgements/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_deployment/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_isaaclab/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_mujoco/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_start/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/markdown/</loc>
+      </url>
+      <url>
         <loc>https://asig-x.github.io/EAI-Lab/mocap/camera_tracking/</loc>
       </url>
       <url>
         <loc>https://asig-x.github.io/EAI-Lab/mocap/drone/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/gloves/</loc>
+      </url>
+      <url>
+        <loc>https://asig-x.github.io/EAI-Lab/mocap/resple/</loc>
       </url>
       <url>
         <loc>https://asig-x.github.io/EAI-Lab/mocap/uwb/</loc>
@@ -16,27 +40,9 @@
         <loc>https://asig-x.github.io/EAI-Lab/mocap/vins_mono/</loc>
       </url>
       <url>
-        <loc>https://asig-x.github.io/EAI-Lab/mocap/resple/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/mocap/gloves/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_start/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_mujoco/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_isaaclab/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/go2/go2_deployment/</loc>
+        <loc>https://asig-x.github.io/EAI-Lab/mumos/</loc>
       </url>
       <url>
         <loc>https://asig-x.github.io/EAI-Lab/teaching/</loc>
-      </url>
-      <url>
-        <loc>https://asig-x.github.io/EAI-Lab/acknowledgements/</loc>
       </url>
 </urlset>

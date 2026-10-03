@@ -2,13 +2,15 @@
 
 Welcome to the Embodied AI Lab for Education, an open-source platform providing practical guides, software, and teaching resources for robotics and embodied intelligence.
 
-![lab](./images/lab/lab1.png)  
+![lab](./images/lab/lab2.png)  
 
-The lab supports research-driven education through hands-on experiments in perception, localization, control, and autonomous systems. Its facilities include **Unitree Go2 quadruped robots**, a **Qualisys motion-capture system**, **Crazyflie 2.1+ drones**, an **ultra-wideband (UWB) localization network**, **wooden stairs and stands**, and **custom-designed handheld platforms**.
+The lab supports research-driven education through hands-on experiments in perception, localization, control, and autonomous systems. Its facilities include **Unitree Go2 quadruped robots**, 
+<!-- a **Qualisys motion-capture system**,  -->
+**Crazyflie 2.1+ drones**, an **ultra-wideband (UWB) localization network**, **wooden stairs and stands**, and **custom-designed handheld platforms**.
 
 This documentation introduces the main hardware platforms and experimental tools available in the lab. You will learn how to work with:
 
-- [Qualisys camera-based motion tracking](./mocap/camera_tracking.md)
+<!-- - [Qualisys camera-based motion tracking](./mocap/camera_tracking.md) -->
 - [Crazyflie 2.1+ drones](./mocap/drone.md)
 - [Ultra-wideband localization](./mocap/uwb.md)
 - [Visual-inertial odometry](./mocap/vins_mono.md)
